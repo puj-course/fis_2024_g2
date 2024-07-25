@@ -1,6 +1,6 @@
 # fis_2024_g2
 
-# DeeSpot Music APP Canvas
+# Musify Music APP
 
 ## Descripción del Proyecto
 
