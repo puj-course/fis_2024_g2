@@ -4,7 +4,7 @@
 
 ## Descripción del Proyecto
 
-DeeSpot Music APP Canvas es una innovadora plataforma de música que ofrece a los usuarios una experiencia musical inigualable. Nuestra aplicación está diseñada para proporcionar acceso a una vasta biblioteca musical con opciones tanto gratuitas como premium, además de ofrecer conciertos y videos en realidad virtual. DeeSpot también se distingue por su integración social, recomendaciones inteligentes y una plataforma eficaz para anunciantes.
+Musify es una innovadora plataforma de música que ofrece a los usuarios una experiencia musical inigualable. Nuestra aplicación está diseñada para proporcionar acceso a una vasta biblioteca musical con opciones tanto gratuitas como premium, además de ofrecer conciertos y videos en realidad virtual. DeeSpot también se distingue por su integración social, recomendaciones inteligentes y una plataforma eficaz para anunciantes.
 
 ## Características Principales
 
