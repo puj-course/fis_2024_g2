@@ -1,39 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>   
-    <link rel="icon" href="./assets/musify.png" type="img/png"> 
-    <title>Musify Login Page</title>
-</head>
-<body>
-   <div class="wrapper">
-        <form action="">
-            <h1>LOGIN</h1>
-            <div class="logo-box">
-                <img src="./assets/musify.png" alt="Logotipo">
-            </div>
-            
-            <div class="input-box">
-                <input type="text" placeholder="Username" required><i class='bx bxs-user'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="Password" required><i class='bx bxs-lock-alt' ></i>
-            </div>
-
-            <div class="remember-forgot">
-                <label><input type="checkbox"> Remember Me </label>
-                <a href="#">Forgot password?</a>
-            </div>
-
-            <button type="submit" class="btn-submit">Login</button>
-
-            <div class="register-link">
-                <p>Don't have an account? <a href="#">Register</a></p> 
-            </div>
-        </form>
-   </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="src/assets/musify.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musify</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
