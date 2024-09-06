@@ -17,12 +17,12 @@ function App() {
     <div className="main-page-container">
       
       <SideBar expanded={expanded} setExpanded={setExpanded}>
-        <SideBarItem text="Home" path="/home" icon={<BsHouseDoor size={20}/>}></SideBarItem>
+        <SideBarItem text="Home" active={true} path="/home" icon={<BsHouseDoor size={20}/>}></SideBarItem>
         <SideBarItem text="Albums" path="/albums" icon={<RiAlbumLine size={20}/>}></SideBarItem>
-        <SideBarItem text="Artist" path="/artist" icon={<TiMicrophoneOutline size={20}/>}></SideBarItem>
+        <SideBarItem text="Artist" path="/artist" alert={true} icon={<TiMicrophoneOutline size={20}/>}></SideBarItem>
       </SideBar>
       
-      <div className={`transition-all ${expanded ? "ml-72" : "ml-16"}`}>
+      <div className={`transition-all dark:text-white bg-white min-h-screen dark:bg-[#131416] ${expanded ? "ml-72" : "ml-[72px]"}`}>
         <Outlet />
       </div>
     </div>

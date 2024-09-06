@@ -18,26 +18,26 @@ const SideBar = ({ children, expanded, setExpanded }) => {
     return (
         <aside
             className={`
-                    h-screen transition-all fixed top-0 left-0 text-[#6837CE]
-                    ${expanded ? "w-72" : "w-16"}  
+                    h-screen transition-all fixed top-0 left-0 text-[#8151e9]
+                    ${expanded ? "w-72" : "w-[72px]"}  
                 `}
         >
-            <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+            <nav className="h-full flex flex-col bg-[#F9FAFB] dark:bg-[#1D1E22] shadow-sm">
                 {/* Parte superior del SideBar*/}
-                <div className="p-4 pb-2 flex justify-between items-center h-16">
-                    <div className="flex gap-2 items-center">
+                <div className={`p-1 pb-2 flex items-center h-[6rem] ${expanded? "justify-between" : "justify-center"}`}>
+                    <div className="flex gap-1s items-center ">
                         <img
                             src={musifyLogo}
                             alt="React"
                             className={`
                                     overflow-hidden transition-all 
-                                    ${expanded ? "w-10 h-10" : "w-0"}
+                                    ${expanded ? "w-[5rem] h-[5rem]" : "w-0"}
                                 `}
                         />
                         <span
                             className={`
                                     text-xl font-bold tracking-wide overflow-hidden transition-all 
-                                    ${expanded ? "w-12s" : "hidden"}
+                                    ${expanded ? "w-12s" : "w-0"}
                                 `}
                         >
                             Musify
@@ -45,9 +45,9 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                     </div>
                     <button onClick={() => setExpanded((ex) => !ex)}>
                         {expanded ? (
-                            <BsArrowBarLeft size={25} color="6837CE" />
+                            <BsArrowBarLeft size={25} className="dark:text-white text-[#151719]" />
                         ) : (
-                            <BsArrowBarRight size={25} color="6837CE" />
+                            <BsArrowBarRight size={25} className="dark:text-white text-[#151719]" />
                         )}
                     </button>
                 </div>
@@ -61,7 +61,7 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                 </SideBarContext.Provider>
 
                 {/* Seccion de usuario, la parte de abajo */}
-                <div className="border-t flex p-3 h-16">
+                <div className="flex p-3 h-16 justify-center">
                     <BsPersonCircle size={27} color="6837CE" />
                     <div
                         className={`
@@ -71,8 +71,8 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                         }    
                     `}
                     >
-                        <h4>Usuario</h4>
-                        <span className="text-xs text-gray-700">
+                        <h4 className="dark:text-white">Usuario</h4>
+                        <span className="text-xs text-gray-700 dark:text-gray-300">
                             Informacion del usuario
                         </span>
                     </div>
@@ -101,9 +101,9 @@ export const SideBarItem = ({ icon, text, active, alert, path }) => {
             transition-colors
                 ${
                     active
-                        ? "bg-gradient-to-tr from-violet-300 to-violet-200 text-indigo-800"
-                        : "hover:bg-violet-100 text-gray-600"
-                } 
+                        ? "bg-gradient-to-tr from-violet-300 to-violet-200 text-indigo-800 dark:from-zinc-700 dark:to-zinc-700 dark:text-white "
+                        : "hover:bg-violet-100 dark:hover:bg-zinc-800 text-[#323334] dark:text-[#CDCDCC]"
+                }   
             `}
         >
             {icon}
@@ -118,7 +118,7 @@ export const SideBarItem = ({ icon, text, active, alert, path }) => {
 
             {alert && (
                 <div
-                    className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
+                    className={`absolute right-2 w-2 h-2 rounded bg-violet-500 ${
                         expanded ? "" : "top-2"
                     }`}
                 ></div>
