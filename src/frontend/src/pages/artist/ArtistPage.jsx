@@ -1,4 +1,4 @@
-const Artist = () => {
+const ArtistPage = () => {
     return (
         <div className="p-8">
            <h1 className="text-3xl">Artist</h1> 
@@ -6,4 +6,4 @@ const Artist = () => {
     );
 }
 
-export default Artist;
+export default ArtistPage;

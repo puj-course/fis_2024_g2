@@ -1,32 +1,56 @@
 //Bibliotecas
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-//Componentes propios
-import SideBar, { SideBarItem } from './components/sidebar/SideBar';
+//Paginas y componentes
+import RegisterPage from "./pages/register/RegisterPage";
+import LoginPage from './pages/login/LoginPage'
+import AlbumPage from './pages/albums/AlbumsPage';
+import ArtistPage from './pages/artist/ArtistPage';
+import HomePage from './pages/home/HomePage';
+import MainPage from './pages/main/MainPage';
 
-//Iconos de la sidebar
-import { BsHouseDoor } from 'react-icons/bs';
-import { RiAlbumLine } from "react-icons/ri";
-import { TiMicrophoneOutline } from "react-icons/ti";
+
+//Router
+const router = createBrowserRouter([
+  {
+    path: "/register",
+    element: <RegisterPage />
+  },
+  {
+    path: "/login",
+    element: <LoginPage />
+  },
+  {
+    path: "/",
+    element: <MainPage />,
+    children: [
+      {
+        path: '/',
+        element: <HomePage />
+      },
+      {
+        path: '/home',
+        element: <HomePage />
+      },
+      {
+        path: '/albums',
+        element: <AlbumPage />
+      },
+      {
+        path: '/artist',
+        element: <ArtistPage />
+      }
+    ]
+  }
+]);
 
 function App() {
-  const [expanded, setExpanded] = useState(true); 
-    
-    return (
-    <div className="main-page-container">
-      
-      <SideBar expanded={expanded} setExpanded={setExpanded}>
-        <SideBarItem text="Home" active={true} path="/home" icon={<BsHouseDoor size={20}/>}></SideBarItem>
-        <SideBarItem text="Albums" path="/albums" icon={<RiAlbumLine size={20}/>}></SideBarItem>
-        <SideBarItem text="Artist" path="/artist" alert={true} icon={<TiMicrophoneOutline size={20}/>}></SideBarItem>
-      </SideBar>
-      
-      <div className={`transition-all dark:text-white bg-white min-h-screen dark:bg-[#131416] ${expanded ? "ml-72" : "ml-[72px]"}`}>
-        <Outlet />
-      </div>
-    </div>
-    );
+  return (
+    <RouterProvider router={router} />
+  );
 }
 
 export default App

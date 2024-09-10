@@ -1,4 +1,4 @@
-const Albums = () => {
+const AlbumPage = () => {
     return (
         <div className="p-8">
             <h1 className="text-3xl">Albums</h1>
@@ -8,4 +8,4 @@ const Albums = () => {
 
 
 
-export default Albums;
+export default AlbumPage;

@@ -12,8 +12,10 @@ import {
     BsArrowBarRight,
 } from "react-icons/bs";
 
+//Se crea el contexto de la sidebar, para ver si esta expandida o no
 const SideBarContext = createContext();
 
+//Componente SideBar
 const SideBar = ({ children, expanded, setExpanded }) => {
     return (
         <aside
@@ -24,14 +26,18 @@ const SideBar = ({ children, expanded, setExpanded }) => {
         >
             <nav className="h-full flex flex-col bg-[#F9FAFB] dark:bg-[#1D1E22] shadow-sm">
                 {/* Parte superior del SideBar*/}
-                <div className={`p-1 pb-2 flex items-center h-[6rem] ${expanded? "justify-between" : "justify-center"}`}>
-                    <div className="flex gap-1s items-center ">
+                <div
+                    className={`h-[6rem]  flex items-centerp-1 pb-2 ${
+                        expanded ? "justify-between pr-2" : "justify-center"
+                    }`}
+                >
+                    <div className="flex items-center gap-1s">
                         <img
                             src={musifyLogo}
                             alt="React"
                             className={`
-                                    overflow-hidden transition-all 
-                                    ${expanded ? "w-[5rem] h-[5rem]" : "w-0"}
+                                    overflow-hidden transition-all  
+                                    ${expanded ? "w-20 h-20" : "w-0"}
                                 `}
                         />
                         <span
@@ -45,9 +51,15 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                     </div>
                     <button onClick={() => setExpanded((ex) => !ex)}>
                         {expanded ? (
-                            <BsArrowBarLeft size={25} className="dark:text-white text-[#151719]" />
+                            <BsArrowBarLeft
+                                size={25}
+                                className="dark:text-white text-[#151719]"
+                            />
                         ) : (
-                            <BsArrowBarRight size={25} className="dark:text-white text-[#151719]" />
+                            <BsArrowBarRight
+                                size={25}
+                                className="dark:text-white text-[#151719]"
+                            />
                         )}
                     </button>
                 </div>
@@ -55,17 +67,17 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                 {/* 
                     Items del SideBar, se reciben a traves de las props del componente como "children"
                     Envuelve los items del side bar dentro del provider del context
-                    */}
+                */}
                 <SideBarContext.Provider value={{ expanded }}>
                     <ul className="flex-1 px-3">{children}</ul>
                 </SideBarContext.Provider>
 
                 {/* Seccion de usuario, la parte de abajo */}
-                <div className="flex p-3 h-16 justify-center">
+                <div className="flex justify-center p-3 h-16 ">
                     <BsPersonCircle size={27} color="6837CE" />
                     <div
                         className={`
-                        flex justify-between items-start ml-3 flex-col
+                        flex  flex-col justify-between items-start ml-3 
                         overflow-hidden transition-all ${
                             expanded ? "w-52" : "w-0"
                         }    
@@ -101,9 +113,13 @@ export const SideBarItem = ({ icon, text, active, alert, path }) => {
             transition-colors
                 ${
                     active
-                        ? "bg-gradient-to-tr from-violet-300 to-violet-200 text-indigo-800 dark:from-zinc-700 dark:to-zinc-700 dark:text-white "
+                        ? "bg-gradient-to-tr from-violet-400 to-violet-200 text-indigo-800 dark:from-zinc-700 dark:to-zinc-600 dark:text-white "
                         : "hover:bg-violet-100 dark:hover:bg-zinc-800 text-[#323334] dark:text-[#CDCDCC]"
                 }   
+                ${  expanded 
+                        ? "justify-start" 
+                        : "justify-center"
+                }
             `}
         >
             {icon}
