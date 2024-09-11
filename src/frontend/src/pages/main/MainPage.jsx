@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 //Componentes propios
 import SideBar, { SideBarItem } from '../../components/sidebar/SideBar';
@@ -11,23 +11,26 @@ import { TiMicrophoneOutline } from "react-icons/ti";
 
 const MainPage = () => {
     const [expanded, setExpanded] = useState(true); 
-    
+    const location = useLocation();
+
     return (
         <div className="main-page-container">
             <SideBar expanded={expanded} setExpanded={setExpanded}>
                 <SideBarItem
                     text="Home"
-                    active={true}
+                    active={location.pathname === "/home" || location.pathname === "/"}
                     path="/home"
                     icon={<BsHouseDoor size={20} />}
                 ></SideBarItem>
                 <SideBarItem
                     text="Albums"
+                    active={location.pathname === "/albums"}
                     path="/albums"
                     icon={<RiAlbumLine size={20} />}
                 ></SideBarItem>
                 <SideBarItem
                     text="Artist"
+                    active={location.pathname === "/artist"}
                     path="/artist"
                     alert={true}
                     icon={<TiMicrophoneOutline size={20} />}
