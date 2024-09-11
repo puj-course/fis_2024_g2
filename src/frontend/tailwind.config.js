@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -11,7 +12,8 @@ export default {
         'concert': "url('./src/assets/concert.jpg')"
       },
       colors: {
-        // Añade más colores personalizados aquí
+        "darkCustom": "#131416",
+        "darkNavBar": "#1D1E22",
       },
     },
   },

@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 //Componentes propios
 import SideBar, { SideBarItem } from '../../components/sidebar/SideBar';
+import Header from '../../components/header/Header';
 
 //Iconos de la sidebar
 import { BsHouseDoor } from 'react-icons/bs';
@@ -38,10 +39,11 @@ const MainPage = () => {
             </SideBar>
 
             <div
-                className={`transition-all dark:text-white bg-white min-h-screen dark:bg-[#131416] ${
+                className={`transition-all dark:text-white bg-white min-h-screen dark:bg-darkCustom ${
                     expanded ? "ml-72" : "ml-[72px]"
                 }`}
             >
+                <Header />
                 <Outlet />
             </div>
         </div>

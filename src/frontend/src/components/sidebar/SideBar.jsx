@@ -24,7 +24,7 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                     ${expanded ? "w-72" : "w-[72px]"}  
                 `}
         >
-            <nav className="h-full flex flex-col bg-[#F9FAFB] dark:bg-[#1D1E22] shadow-sm">
+            <nav className="h-full flex flex-col bg-[#F9FAFB] dark:bg-darkNavBar shadow-sm">
                 {/* Parte superior del SideBar*/}
                 <div
                     className={`h-[6rem]  flex items-centerp-1 pb-2 ${
@@ -113,7 +113,7 @@ export const SideBarItem = ({ icon, text, active, alert, path }) => {
             transition-colors
                 ${
                     active
-                        ? "bg-gradient-to-tr from-violet-400 to-violet-200 text-indigo-800 dark:from-zinc-700 dark:to-zinc-600 dark:text-white "
+                        ? "bg-gradient-to-tr from-violet-300 to-violet-200 text-indigo-800 dark:from-zinc-700 dark:to-zinc-600 dark:text-white "
                         : "hover:bg-violet-100 dark:hover:bg-zinc-800 text-[#323334] dark:text-[#CDCDCC]"
                 }   
                 ${  expanded 
