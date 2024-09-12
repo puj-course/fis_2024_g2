@@ -19,13 +19,7 @@ export function Carousel() {
     <div className="relative">
       <div className="embla overflow-hidden" ref={emblaRef}>
         <div className="embla__container flex">
-          {/* Replace with your own card content */}
           {Array.from({ length: 12 }).map((_, index) => (
-            // <div key={index} className="embla__slide flex-none p-2 w-1/3 md:w-1/3 lg:w-1/6">
-            //   <div className="bg-gray-300 h-full flex items-center justify-center">
-            //     <h2 className="text-xl font-semibold">Card {index + 1}</h2>
-            //   </div>
-            // </div>
             <div key={index} className="embla__slide flex-none p-2 w-[70%] sm:w-[68%] md:w-[40%] lg:w-[34%] xl:w-[23%] ">
               <Album />
              </div>
