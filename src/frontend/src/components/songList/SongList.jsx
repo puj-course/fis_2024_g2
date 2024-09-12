@@ -1,4 +1,4 @@
-import Song from "../../components/song/Song";
+import Song from "../song/Song";
 
 // Reemplazo por una API call
 const songs = [
@@ -34,7 +34,7 @@ const songs = [
     }
 ]
 
-const TopSongs = () => {    
+const SongList = () => {    
     return (
         <div className="flex flex-col gap-6">
             <h3 className="text-xl font-semibold">Top Songs ⬆️</h3>
@@ -43,7 +43,7 @@ const TopSongs = () => {
                 
                 {
                     songs.map((song) => (
-                        <Song key={song.id} name={song.name} author={song.author} duration={song.duration} />
+                        <Song key={song.id} id={song.id} name={song.name} author={song.author} duration={song.duration} />
                     ))
                 }
 
@@ -52,4 +52,4 @@ const TopSongs = () => {
     );
 };
 
-export default TopSongs;
+export default SongList;

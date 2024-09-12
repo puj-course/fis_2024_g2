@@ -2,7 +2,7 @@
 import concert from "../../assets/concert.jpg";
 
 //Components
-import TopSongs from "./TopSongs";
+import SongList from "../../components/songList/SongList";
 
 const HomePage = () => {
     return (
@@ -27,7 +27,7 @@ const HomePage = () => {
                 </div>
 
                 {/* Top songs */}
-                <TopSongs />
+                <SongList />
             </div>
         </div>
     );
