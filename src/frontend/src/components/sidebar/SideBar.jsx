@@ -24,7 +24,7 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                     ${expanded ? "w-72" : "w-[72px]"}  
                 `}
         >
-            <nav className="h-full flex flex-col bg-[#F9FAFB] dark:bg-darkNavBar shadow-sm">
+            <nav className="h-full flex flex-col bg-[#e9ecee] dark:bg-darkNavBar shadow-sm">
                 {/* Parte superior del SideBar*/}
                 <div
                     className={`h-[6rem]  flex items-centerp-1 pb-2 ${
@@ -83,9 +83,9 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                         }    
                     `}
                     >
-                        <h4 className="dark:text-white">Usuario</h4>
+                        <h4 className="dark:text-white">User</h4>
                         <span className="text-xs text-gray-700 dark:text-gray-300">
-                            Informacion del usuario
+                            User info
                         </span>
                     </div>
                 </div>

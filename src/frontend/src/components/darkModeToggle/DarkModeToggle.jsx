@@ -1,3 +1,4 @@
+//Hooks de react
 import React, { useEffect, useState } from "react";
 
 //Iconos
@@ -34,9 +35,9 @@ const DarkModeToggle = () => {
     };
 
     return (
-        <div className="w-12 bg-gray-400 dark:bg-gray-800 rounded-full relative cursor-pointer h-6  flex justify-evenly items-center transition-all" onClick={handleToggle}>
+        <div className="w-12 bg-gray-400 dark:bg-gray-800 text-white rounded-full relative cursor-pointer h-6  flex justify-evenly items-center transition-all" onClick={handleToggle}>
             <CiSun />
-            <IoMoonOutline />
+            <IoMoonOutline/>
             <div
                 className={`w-1/2 h-full rounded-full bg-gray-100 dark:bg-gray-700 z-50 absolute top-0 ${darkMode ? "right-0" : "left-0"}`}
             ></div>
