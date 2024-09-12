@@ -3,6 +3,7 @@ import concert from "../../assets/concert.jpg";
 
 //Components
 import SongList from "../../components/songList/SongList";
+import { Carousel } from "../../components/Carousel/Carousel";
 
 const HomePage = () => {
     return (
@@ -18,7 +19,12 @@ const HomePage = () => {
                 </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <h3 className="text-xl font-semibold mb-2">
+                    Explore trending albums
+            </h3>
+            <Carousel/>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
                 
                 {/* Popular album */}
                 <div className="flex flex-col gap-6">
