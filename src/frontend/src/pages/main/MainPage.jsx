@@ -30,9 +30,9 @@ const MainPage = () => {
                     icon={<RiAlbumLine size={20} />}
                 ></SideBarItem>
                 <SideBarItem
-                    text="Artist"
-                    active={location.pathname === "/artist"}
-                    path="/artist"
+                    text="Artists"
+                    active={location.pathname === "/artists"}
+                    path="/artists"
                     alert={true}
                     icon={<TiMicrophoneOutline size={20} />}
                 ></SideBarItem>

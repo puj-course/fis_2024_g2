@@ -5,6 +5,9 @@ import concert from "../../assets/concert.jpg";
 import SongList from "../../components/songList/SongList";
 import { Carousel } from "../../components/Carousel/Carousel";
 
+//Dummy data
+import { musicData } from "../../../data/musicData";
+
 const HomePage = () => {
     return (
         <div className="p-4 min-h-screen">
@@ -33,7 +36,7 @@ const HomePage = () => {
                 </div>
 
                 {/* Top songs */}
-                <SongList />
+                <SongList title="Top Songs ⬆️" songs={musicData.songs} howMuch={5}/>
             </div>
         </div>
     );

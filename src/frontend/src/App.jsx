@@ -8,6 +8,7 @@ import {
 import RegisterPage from "./pages/register/RegisterPage";
 import LoginPage from './pages/login/LoginPage'
 import AlbumPage from './pages/albums/AlbumsPage';
+import ArtistsPage from './pages/artists/ArtistPage';
 import ArtistPage from './pages/artist/ArtistPage';
 import HomePage from './pages/home/HomePage';
 import MainPage from './pages/main/MainPage';
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
         element: <AlbumPage />
       },
       {
-        path: '/artist',
+        path: '/artists',
+        element: <ArtistsPage />,
+      },
+      {
+        path: '/artist/:id',
         element: <ArtistPage />
       }
     ]
