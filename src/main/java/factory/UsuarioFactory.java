@@ -1,8 +1,13 @@
 package factory;
 
+import model.Artista;
+import model.Usuario;
+import model.UsuarioGratuito;
+import model.UsuarioPremium;
+
 public class UsuarioFactory {
 
-    public static Usuario crearUsuario(TipoUsuarioEnum tipo, String idUsuario, String nombres, String apellidos, String nickname, String email, String contraseña, String fotoPerfilUrl, String biografia) {
+    public static Usuario crearUsuario(TipoUsuario tipo, String idUsuario, String nombres, String apellidos, String nickname, String email, String contraseña, String fotoPerfilUrl, String biografia) {
         switch (tipo) {
             case GRATUITO:
                 return new UsuarioGratuito(idUsuario, nombres, apellidos, nickname, email, contraseña, fotoPerfilUrl);

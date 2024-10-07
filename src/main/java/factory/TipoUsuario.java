@@ -1,5 +1,5 @@
 package factory;
-public enum TipoUsuarioEnum {
+public enum TipoUsuario {
     GRATUITO,
     PREMIUM,
     ARTISTA
