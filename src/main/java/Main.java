@@ -1,5 +1,5 @@
-import factory.TipoUsuario;
-import factory.UsuarioFactory;
+import model.TipoUsuario;
+import model.UsuarioFactory;
 import model.Usuario;
 
 public class Main {

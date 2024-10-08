@@ -1,9 +1,4 @@
-package factory;
-
-import model.Artista;
-import model.Usuario;
-import model.UsuarioGratuito;
-import model.UsuarioPremium;
+package model;
 
 public class UsuarioFactory {
 

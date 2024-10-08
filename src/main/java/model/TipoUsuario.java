@@ -1,4 +1,4 @@
-package factory;
+package model;
 public enum TipoUsuario {
     GRATUITO,
     PREMIUM,
