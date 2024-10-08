@@ -1,4 +1,4 @@
-package model;
+package org.musify.model;
 
 public class Artista extends Usuario {
     private String biografia;

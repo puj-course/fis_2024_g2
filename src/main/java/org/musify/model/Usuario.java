@@ -1,4 +1,4 @@
-package model;
+package org.musify.model;
 
 public abstract class Usuario {
     protected String idUsuario;

@@ -1,4 +1,4 @@
-package config;
+package org.musify.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
