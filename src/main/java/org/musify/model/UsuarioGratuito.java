@@ -1,7 +1,22 @@
 package org.musify.model;
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+import java.sql.Date;
+
+
+@Entity
+@DiscriminatorValue("gratuito")
 public class UsuarioGratuito extends Usuario {
-    public UsuarioGratuito(String idUsuario, String nombres, String apellidos, String nickname, String email, String contraseña, String fotoPerfilUrl) {
-        super(idUsuario, nombres, apellidos, nickname, email, contraseña, fotoPerfilUrl);
+    public UsuarioGratuito() {
+    }
+
+    public UsuarioGratuito(String idUsuario, String nombres, String apellidos, String nickname, String contraseña,
+                          String email, Date fechaNacimiento, Date fechaRegistro, String estado,
+                          String paisIdPais, String idiomaIdIdioma, String fotoPerfilUrl) {
+
+        super(idUsuario, nombres, apellidos, nickname, contraseña, email, fechaNacimiento, fechaRegistro, estado, paisIdPais, idiomaIdIdioma, fotoPerfilUrl);
     }
 
     @Override
