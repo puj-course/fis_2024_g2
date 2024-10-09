@@ -1,19 +1,76 @@
 package org.musify.model;
 
-public class Artista extends Usuario {
+import jakarta.persistence.*;
+
+import java.sql.Date;
+
+@Entity
+@Table(name = "artista")
+public class Artista {
+
+    @Id
+    @Column(name = "id_artista", length = 30, nullable = false)
+    private String idArtista;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+
+    @Column(name = "nombre_artistico", length = 255, nullable = false)
+    private String nombreArtistico;
+
+    @Column(name = "fecha_registro_artista", nullable = false)
+    private Date fechaRegistroArtista;
+
+    @Column(name = "biografia", length = 100)
     private String biografia;
 
-    public Artista(String idUsuario, String nombres, String apellidos, String nickname, String email, String contraseña, String fotoPerfilUrl, String biografia) {
-        super(idUsuario, nombres, apellidos, nickname, email, contraseña, fotoPerfilUrl);
+    // Constructor por defecto
+    public Artista() {
+    }
+
+    // Constructor con parámetros
+    public Artista(String idArtista, Usuario usuario, String nombreArtistico, Date fechaRegistroArtista, String biografia) {
+        this.idArtista = idArtista;
+        this.usuario = usuario;
+        this.nombreArtistico = nombreArtistico;
+        this.fechaRegistroArtista = fechaRegistroArtista;
         this.biografia = biografia;
     }
 
-    @Override
-    public void mostrarTipoUsuario() {
-        System.out.println("Tipo de usuario: Artista");
+    // Getters y Setters
+    public String getIdArtista() {
+        return idArtista;
     }
 
-    // Getters y setters
+    public void setIdArtista(String idArtista) {
+        this.idArtista = idArtista;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getNombreArtistico() {
+        return nombreArtistico;
+    }
+
+    public void setNombreArtistico(String nombreArtistico) {
+        this.nombreArtistico = nombreArtistico;
+    }
+
+    public Date getFechaRegistroArtista() {
+        return fechaRegistroArtista;
+    }
+
+    public void setFechaRegistroArtista(Date fechaRegistroArtista) {
+        this.fechaRegistroArtista = fechaRegistroArtista;
+    }
+
     public String getBiografia() {
         return biografia;
     }
