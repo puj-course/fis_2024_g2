@@ -1,4 +1,4 @@
-package org.musify.service;
+package org.musify.services;
 
 import org.musify.model.Usuario;
 
