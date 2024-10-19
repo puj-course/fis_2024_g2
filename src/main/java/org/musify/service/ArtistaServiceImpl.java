@@ -16,4 +16,5 @@ public class ArtistaServiceImpl implements ArtistaService{
         return artistaRepository.findByNombreArtistico(nombreArtistico)
                 .orElseThrow(() ->new EntityNotFoundException("Artista no encontrado"));
     }
+
 }

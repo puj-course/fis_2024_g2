@@ -1,6 +1,9 @@
 package org.musify.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -8,6 +11,17 @@ import java.sql.Date;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "rol")  // Se define la columna, sin tenerla como atributo
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "rol"  // Aquí se definirá el tipo de usuario en el JSON usando "rol"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = UsuarioGratuito.class, name = "gratuito"),
+        @JsonSubTypes.Type(value = UsuarioPremium.class, name = "premium"),
+        @JsonSubTypes.Type(value = Administrador.class, name = "admin")
+})
 public abstract class Usuario {
 
     @Id
@@ -26,7 +40,9 @@ public abstract class Usuario {
     @Column(name = "contra")
     private String contraseña;
 
+
     @Column(name = "numero_telefonico")
+    //@JsonProperty("numero_telefonico") //Si en el JSON se pone distinto nombre al del atributo en la clase
     private String numeroTelefonico;
 
     @Column(name = "fecha_nacimiento")
