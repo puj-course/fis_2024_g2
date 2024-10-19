@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "rol")
+@DiscriminatorColumn(name = "rol")  // Se define la columna, sin tenerla como atributo
 public abstract class Usuario {
 
     @Id
@@ -24,29 +24,25 @@ public abstract class Usuario {
     private String nickname;
 
     @Column(name = "contra")
-    private String contraseña; // Puedes usar 'contraseña' o 'contra' como prefieras, pero asegúrate de que coincida con el nombre en la base de datos.
+    private String contraseña;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "numero_telefonico")
+    private String numeroTelefonico;
 
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
 
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
-    @Column(name = "rol", insertable = false, updatable = false)
-
-    //@Column(name = "rol")
-    private String rol;
 
     @Column(name = "estado")
     private String estado;
 
     @Column(name = "pais_id_pais")
-    private String paisIdPais; // Puedes usar el nombre que prefieras, pero asegúrate de que coincida.
+    private String paisIdPais;
 
     @Column(name = "idioma_id_idioma")
-    private String idiomaIdIdioma; // Puedes usar el nombre que prefieras, pero asegúrate de que coincida.
+    private String idiomaIdIdioma;
 
     @Column(name = "foto_perfil_url")
     private String fotoPerfilUrl;
@@ -56,14 +52,14 @@ public abstract class Usuario {
 
     // Constructor con parámetros sin 'rol'
     public Usuario(String idUsuario, String nombres, String apellidos, String nickname, String contraseña,
-                   String email, Date fechaNacimiento, Date fechaRegistro, String estado,
+                   String numeroTelefonico, Date fechaNacimiento, Date fechaRegistro, String estado,
                    String paisIdPais, String idiomaIdIdioma, String fotoPerfilUrl) {
         this.idUsuario = idUsuario;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.nickname = nickname;
         this.contraseña = contraseña;
-        this.email = email;
+        this.numeroTelefonico = numeroTelefonico;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
@@ -109,12 +105,12 @@ public abstract class Usuario {
         this.nickname = nickname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getNumeroTelefonico() {
+        return numeroTelefonico;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNumeroTelefonico(String numeroTelefonico) {
+        this.numeroTelefonico = numeroTelefonico;
     }
 
     public String getContra() {
@@ -147,14 +143,6 @@ public abstract class Usuario {
 
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 
     public String getEstado() {

@@ -13,13 +13,13 @@ public class Artista {
     private String idArtista;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "usuario_id_usuario", nullable = false)
     private Usuario usuario;
 
     @Column(name = "nombre_artistico", length = 255, nullable = false)
     private String nombreArtistico;
 
-    @Column(name = "fecha_registro_artista", nullable = false)
+    @Column(name = "fecha_registro", nullable = false)
     private Date fechaRegistroArtista;
 
     @Column(name = "biografia", length = 100)
