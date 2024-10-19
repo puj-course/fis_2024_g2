@@ -1,4 +1,4 @@
-package org.musify.services;
+package org.musify.service;
 
 import org.musify.model.Usuario;
 import java.util.*;
@@ -40,7 +40,7 @@ public class Autenticacion implements IAutenticacion{
     @Override
     public boolean autenticar(String nickname, String contraseña) {
         Usuario usuario = usuariosRegistrados.get(Integer.parseInt(nickname));
-        if (usuario != null && usuario.getContraseña().equals(contraseña)) {
+        if (usuario != null && usuario.getContra().equals(contraseña)) {
             System.out.println("Autenticación exitosa para el usuario: " + nickname);
             return true;
         } else {

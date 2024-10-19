@@ -1,13 +1,10 @@
-package org.musify.services;
+package org.musify.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.Usuario;
 import org.musify.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {

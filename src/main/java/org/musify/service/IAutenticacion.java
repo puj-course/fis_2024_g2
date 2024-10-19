@@ -1,4 +1,4 @@
-package org.musify.services;
+package org.musify.service;
 
 public interface IAutenticacion {
     boolean autenticar(String email, String contraseña);

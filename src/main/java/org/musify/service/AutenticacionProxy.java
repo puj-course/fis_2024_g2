@@ -1,4 +1,4 @@
-package org.musify.services;
+package org.musify.service;
 
 public class AutenticacionProxy implements IAutenticacion {
 
