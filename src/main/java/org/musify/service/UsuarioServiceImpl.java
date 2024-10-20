@@ -25,9 +25,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario crearUsuario(Usuario usuario) {
-        //usuario.setId_usuario("4");
         String idAleatorio = UUID.randomUUID().toString();  // Genera un UUID de 32 caracteres
-        usuario.setId_usuario(idAleatorio.substring(0, 30));
+        usuario.setId_usuario(idAleatorio.replace("-", ""));
         usuario.setFechaRegistro(Date.valueOf(LocalDate.now()));
         usuario.setEstado("activo");
         return usuarioRepository.save(usuario);

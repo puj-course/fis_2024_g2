@@ -55,10 +55,10 @@ public abstract class Usuario {
     private String estado;
 
     @Column(name = "pais_id_pais")
-    private String paisIdPais;
+    private Integer paisIdPais;
 
     @Column(name = "idioma_id_idioma")
-    private String idiomaIdIdioma;
+    private Integer idiomaIdIdioma;
 
     @Column(name = "foto_perfil_url")
     private String fotoPerfilUrl;
@@ -69,7 +69,7 @@ public abstract class Usuario {
     // Constructor con parámetros sin 'rol'
     public Usuario(String idUsuario, String nombres, String apellidos, String nickname, String contraseña,
                    String numeroTelefonico, Date fechaNacimiento, Date fechaRegistro, String estado,
-                   String paisIdPais, String idiomaIdIdioma, String fotoPerfilUrl) {
+                   Integer paisIdPais, Integer idiomaIdIdioma, String fotoPerfilUrl) {
         this.idUsuario = idUsuario;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -169,19 +169,19 @@ public abstract class Usuario {
         this.estado = estado;
     }
 
-    public String getPaisIdPais() {
+    public Integer getPaisIdPais() {
         return paisIdPais;
     }
 
     public void setPaisIdPais(String paisIdPais) {
-        this.paisIdPais = paisIdPais;
+        this.paisIdPais = Integer.valueOf(paisIdPais);
     }
 
-    public String getIdiomaIdIdioma() {
+    public Integer getIdiomaIdIdioma() {
         return idiomaIdIdioma;
     }
 
     public void setIdiomaIdIdioma(String idiomaIdIdioma) {
-        this.idiomaIdIdioma = idiomaIdIdioma;
+        this.idiomaIdIdioma = Integer.valueOf(idiomaIdIdioma);
     }
 }

@@ -9,7 +9,7 @@ import java.sql.Date;
 public class Artista {
 
     @Id
-    @Column(name = "id_artista", length = 30, nullable = false)
+    @Column(name = "id_artista", length = 32, nullable = false)
     private String idArtista;
 
     @ManyToOne

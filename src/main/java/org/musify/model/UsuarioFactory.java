@@ -8,7 +8,7 @@ public class UsuarioFactory {
                                        String nickname, String email, String contraseña,
                                        String fotoPerfilUrl, Date fechaNacimiento,
                                        Date fechaRegistro, String estado,
-                                       String paisIdPais, String idiomaIdIdioma, String biografia) {
+                                       Integer paisIdPais, Integer idiomaIdIdioma, String biografia) {
         switch (tipo) {
             case GRATUITO:
                 return new UsuarioGratuito(idUsuario, nombres, apellidos, nickname, contraseña, email,
