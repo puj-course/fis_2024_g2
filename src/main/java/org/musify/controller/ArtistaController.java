@@ -2,14 +2,15 @@ package org.musify.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.Artista;
+import org.musify.model.ArtistaDTO;
 import org.musify.service.ArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/artista")
@@ -33,6 +34,26 @@ public class ArtistaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor");
         }
 
+    }
+
+    @PostMapping
+    public ResponseEntity<?> postArtista(@RequestBody ArtistaDTO a) {
+        try {
+            // Llama al método en service
+            Artista nuevoArtista =  artistaService.crearArtista(a);
+
+            // Crear la URI para retornar la ubicación del nuevo artista
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{nombreArtistico}")
+                    .buildAndExpand(nuevoArtista.getNombreArtistico())
+                    .toUri();
+
+            return ResponseEntity.created(location).body(nuevoArtista);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al crear el artista: " + e.getMessage());
+        }
     }
 
 

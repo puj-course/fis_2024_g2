@@ -35,7 +35,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<?> postCustomer(@RequestBody Usuario u) {
+    public ResponseEntity<?> postUsuario(@RequestBody Usuario u) {
         try {
             // Llama al método en service
             Usuario nuevoUsuario =  usuarioService.crearUsuario(u);
@@ -50,7 +50,7 @@ public class UsuarioController {
             return ResponseEntity.created(location).body(nuevoUsuario);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al crear el cliente: " + e.getMessage());
+                    .body("Error al crear el usuario: " + e.getMessage());
         }
     }
 
