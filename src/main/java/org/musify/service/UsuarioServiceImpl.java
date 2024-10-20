@@ -18,7 +18,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
-    public Usuario getUsuario(String id) {
+    public Usuario getUsuarioById(String id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
     }
@@ -30,6 +30,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setFechaRegistro(Date.valueOf(LocalDate.now()));
         usuario.setEstado("activo");
         return usuarioRepository.save(usuario);
+    }
+    @Override
+    public Usuario getUsuarioByNickname(String nickname) {
+        return usuarioRepository.findByNickname(nickname)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
     }
 
 }
