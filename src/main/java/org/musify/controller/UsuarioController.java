@@ -2,7 +2,9 @@ package org.musify.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.Usuario;
+import org.musify.model.UsuarioFactory;
 import org.musify.model.UsuarioGratuito;
+import org.musify.model.UsuarioRegistroDTO;
 import org.musify.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,10 +52,11 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<?> postUsuario(@RequestBody Usuario u) {
+    public ResponseEntity<?> postUsuario(@RequestBody UsuarioRegistroDTO u) {
         try {
             // Llama al método en service
-            Usuario nuevoUsuario =  usuarioService.crearUsuario(u);
+            Usuario nuevoUsuario = UsuarioFactory.crearUsuarioPorRol(u.getRol());
+            nuevoUsuario=usuarioService.crearUsuario(u, nuevoUsuario);
 
             // Crear la URI para retornar la ubicación del nuevo usuario
             URI location = ServletUriComponentsBuilder

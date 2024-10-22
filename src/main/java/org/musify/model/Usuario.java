@@ -173,15 +173,15 @@ public abstract class Usuario {
         return paisIdPais;
     }
 
-    public void setPaisIdPais(String paisIdPais) {
-        this.paisIdPais = Integer.valueOf(paisIdPais);
+    public void setPaisIdPais(Integer paisIdPais) {
+        this.paisIdPais = paisIdPais;
     }
 
     public Integer getIdiomaIdIdioma() {
         return idiomaIdIdioma;
     }
 
-    public void setIdiomaIdIdioma(String idiomaIdIdioma) {
-        this.idiomaIdIdioma = Integer.valueOf(idiomaIdIdioma);
+    public void setIdiomaIdIdioma(Integer idiomaIdIdioma) {
+        this.idiomaIdIdioma = idiomaIdIdioma;
     }
 }

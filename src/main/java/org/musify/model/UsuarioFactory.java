@@ -4,6 +4,20 @@ import java.sql.Date;
 
 public class UsuarioFactory {
 
+    public static Usuario crearUsuarioPorRol(String rol) {
+        switch (rol.toLowerCase()) {
+            case "premium":
+                return new UsuarioPremium();
+            case "gratuito":
+                return new UsuarioGratuito();
+            case "admin":
+                return new Administrador();
+            default:
+                throw new IllegalArgumentException("Rol no válido: " + rol);
+        }
+    }
+
+
     public static Usuario crearUsuario(TipoUsuario tipo, String idUsuario, String nombres, String apellidos,
                                        String nickname, String email, String contraseña,
                                        String fotoPerfilUrl, Date fechaNacimiento,
