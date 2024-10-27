@@ -3,6 +3,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,14 +31,14 @@ public class test {
                             // Parsear el archivo
                             CompilationUnit cu = parserJava.parse(in).getResult().orElseThrow();
                             // Visitar cada clase y método
-                            cu.accept(new VisitanteFan(), null);
+                            cu.accept(new VisitanteComplejidad(), null);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     });
 
             // Imprimir promedios finales
-            VisitanteFan.longitudCodigo();
+            VisitanteComplejidad.longitudCodigo();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +46,8 @@ public class test {
     }
 
     // Clase visitante para las clases y sus métodos
-    private static class VisitanteFan extends VoidVisitorAdapter<Void> {
+    private static class VisitanteComplejidad extends VoidVisitorAdapter<Void> {
+        private static final Map<String, Integer> complejidadCiclomaticaPorMetodo = new HashMap<>();
         private static final List<Integer> contadorLineasPorClase = new ArrayList<>();
         private static final List<Integer> contadorLineasPorMetodo = new ArrayList<>();
         private static final Map<String, List<Integer>> lineasPromedioMetodoPorClase = new HashMap<>();
@@ -85,6 +87,33 @@ public class test {
                 int contadorDeLineas = md.getEnd().map(pos -> pos.line).orElse(0) - md.getBegin().map(pos -> pos.line).orElse(0) + 1;
                 contadorLineasPorMetodo.add(contadorDeLineas);
                 lineasPromedioMetodoPorClase.get(nombreClase).add(contadorDeLineas);
+
+                // Calcular complejidad ciclomatica
+                int arcos = 0;
+                int nodos = 0;
+                int p = 1; // Asumimos un solo componente conectado
+
+                // Contar nodos de decisión (if, for, while, do-while, switch)
+                int decisionNodes = md.findAll(IfStmt.class).size() +
+                        md.findAll(ForStmt.class).size() +
+                        md.findAll(WhileStmt.class).size() +
+                        md.findAll(DoStmt.class).size() +
+                        md.findAll(SwitchStmt.class).size();
+                nodos += decisionNodes;
+                nodos += 1; // Nodo inicial del método
+                // Contar arcos (cada nodo de decisión tiene un arco de entrada y uno o más de salida)
+                arcos += md.findAll(IfStmt.class).size() * 2;
+                arcos += md.findAll(ForStmt.class).size() * 2;
+                arcos += md.findAll(WhileStmt.class).size() * 2;
+                arcos += md.findAll(DoStmt.class).size() * 2;
+                arcos += md.findAll(SwitchStmt.class).stream().mapToInt(s -> s.getEntries().size() + 1).sum();
+                arcos += 1; // Arco del nodo inicial
+
+                // Aplicar la fórmula de complejidad ciclomatica M = e - n + 2 * p
+                int complejidadCiclomatica = arcos - nodos + 2 * p;
+                complejidadCiclomaticaPorMetodo.put(md.getNameAsString(), complejidadCiclomatica);
+                System.out.println("  Complejidad ciclomatica: " + complejidadCiclomatica);
+
             });
         }
 
@@ -101,6 +130,9 @@ public class test {
             });
 
             System.out.println("Promedio general de líneas por método: " + promedioLineaMetodo);
+
+            complejidadCiclomaticaPorMetodo.forEach((nombreMetodo, complejidad) ->
+                    System.out.println("Complejidad ciclomatica del método " + nombreMetodo + ": " + complejidad));
         }
     }
 }
