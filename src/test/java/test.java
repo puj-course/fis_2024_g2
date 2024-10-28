@@ -1,10 +1,16 @@
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.ast.stmt.*;
+import com.github.javaparser.ast.stmt.DoStmt;
+import com.github.javaparser.ast.stmt.ForStmt;
+import com.github.javaparser.ast.stmt.IfStmt;
+import com.github.javaparser.ast.stmt.SwitchStmt;
+import com.github.javaparser.ast.stmt.WhileStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,10 +53,11 @@ public class test {
 
     // Clase visitante para las clases y sus métodos
     private static class VisitanteComplejidad extends VoidVisitorAdapter<Void> {
-        private static final Map<String, Integer> complejidadCiclomaticaPorMetodo = new HashMap<>();
         private static final List<Integer> contadorLineasPorClase = new ArrayList<>();
         private static final List<Integer> contadorLineasPorMetodo = new ArrayList<>();
         private static final Map<String, List<Integer>> lineasPromedioMetodoPorClase = new HashMap<>();
+        private static final Map<String, Integer> complejidadCiclomaticaPorMetodo = new HashMap<>();
+        private static final Map<String, List<Integer>> largoDeIdentificadoresPorClase = new HashMap<>();
 
         @Override
         public void visit(ClassOrInterfaceDeclaration cid, Void arg) {
@@ -59,6 +66,17 @@ public class test {
             int contadorLineasClase = cid.getEnd().map(pos -> pos.line).orElse(0) - cid.getBegin().map(pos -> pos.line).orElse(0) + 1;
             contadorLineasPorClase.add(contadorLineasClase);
             lineasPromedioMetodoPorClase.put(nombreClase, new ArrayList<>());
+            largoDeIdentificadoresPorClase.put(nombreClase, new ArrayList<>());
+
+            // Calcular la longitud de los identificadores (nombres de atributos) de la clase
+            cid.findAll(FieldDeclaration.class).forEach(field -> {
+                field.getVariables().forEach(variable -> {
+                    String typeName = field.getElementType().asString();
+                    String variableName = variable.getNameAsString();
+                    int identifierLength = typeName.length() + variableName.length();
+                    largoDeIdentificadoresPorClase.get(nombreClase).add(identifierLength);
+                });
+            });
 
             cid.findAll(MethodDeclaration.class).forEach(md -> {
                 System.out.println("Clase: " + nombreClase);
@@ -101,6 +119,7 @@ public class test {
                         md.findAll(SwitchStmt.class).size();
                 nodos += decisionNodes;
                 nodos += 1; // Nodo inicial del método
+
                 // Contar arcos (cada nodo de decisión tiene un arco de entrada y uno o más de salida)
                 arcos += md.findAll(IfStmt.class).size() * 2;
                 arcos += md.findAll(ForStmt.class).size() * 2;
@@ -113,7 +132,6 @@ public class test {
                 int complejidadCiclomatica = arcos - nodos + 2 * p;
                 complejidadCiclomaticaPorMetodo.put(md.getNameAsString(), complejidadCiclomatica);
                 System.out.println("  Complejidad ciclomatica: " + complejidadCiclomatica);
-
             });
         }
 
@@ -124,15 +142,28 @@ public class test {
             System.out.println("\nComplejidad por longitud de codigo:");
             System.out.println("Promedio de líneas por clase: " + promedioLineaClase);
 
-            lineasPromedioMetodoPorClase.forEach((className, lines) -> {
-                double promedioLineaMetodoClase = lines.stream().mapToInt(Integer::intValue).average().orElse(0.0);
-                System.out.println("Promedio de líneas por método en la clase " + className + ": " + promedioLineaMetodoClase);
+            lineasPromedioMetodoPorClase.forEach((nombreClase, lineas) -> {
+                double promedioLineaMetodoClase = lineas.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+                System.out.println("Promedio de líneas por método en la clase " + nombreClase + ": " + promedioLineaMetodoClase);
             });
 
             System.out.println("Promedio general de líneas por método: " + promedioLineaMetodo);
 
             complejidadCiclomaticaPorMetodo.forEach((nombreMetodo, complejidad) ->
                     System.out.println("Complejidad ciclomatica del método " + nombreMetodo + ": " + complejidad));
+
+            // Calcular e imprimir la longitud promedio de los identificadores por clase y en todo el programa
+            largoDeIdentificadoresPorClase.forEach((nombreClase, longitud) -> {
+                double longitudPromedioIdentificador = longitud.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+                System.out.println("Promedio de longitud de identificadores en la clase " + nombreClase + ": " + longitudPromedioIdentificador);
+            });
+
+            double promedioTotalLargoIdentificadores = largoDeIdentificadoresPorClase.values().stream()
+                    .flatMap(List::stream)
+                    .mapToInt(Integer::intValue)
+                    .average()
+                    .orElse(0.0);
+            System.out.println("Promedio general de longitud de identificadores: " + promedioTotalLargoIdentificadores);
         }
     }
 }
