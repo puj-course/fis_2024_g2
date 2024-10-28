@@ -44,7 +44,7 @@ public class test {
                     });
 
             // Imprimir promedios finales
-            VisitanteComplejidad.longitudCodigo();
+            VisitanteComplejidad.imprimirResultados();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,6 +58,8 @@ public class test {
         private static final Map<String, List<Integer>> lineasPromedioMetodoPorClase = new HashMap<>();
         private static final Map<String, Integer> complejidadCiclomaticaPorMetodo = new HashMap<>();
         private static final Map<String, List<Integer>> largoDeIdentificadoresPorClase = new HashMap<>();
+        private static final Map<String, Integer> profundidadAnidadoCondicional = new HashMap<>();
+
 
         @Override
         public void visit(ClassOrInterfaceDeclaration cid, Void arg) {
@@ -132,10 +134,29 @@ public class test {
                 int complejidadCiclomatica = arcos - nodos + 2 * p;
                 complejidadCiclomaticaPorMetodo.put(md.getNameAsString(), complejidadCiclomatica);
                 System.out.println("  Complejidad ciclomatica: " + complejidadCiclomatica);
+
+                // Calcular la profundidad de anidado condicional
+                int anidadosCondicionales = calcularAnidadoCondicional(md);
+                profundidadAnidadoCondicional.put(md.getNameAsString(), anidadosCondicionales);
+                System.out.println("  Profundidad máxima de anidamiento condicional: " + anidadosCondicionales);
             });
         }
 
-        public static void longitudCodigo() {
+    private int calcularAnidadoCondicional(IfStmt ifS) {
+        return ifS.findAll(IfStmt.class, stmt -> stmt != ifS).size() + 1;
+    }
+
+    private int calcularAnidadoCondicional(MethodDeclaration md) {
+        List<IfStmt> ifStatements = md.findAll(IfStmt.class);
+        int cantidadAnidados = 0;
+        for (IfStmt ifStmt : ifStatements) {
+            int cantActual = calcularAnidadoCondicional(ifStmt);
+            cantidadAnidados = Math.max(cantidadAnidados, cantActual);
+        }
+        return cantidadAnidados;
+    }
+
+        public static void imprimirResultados() {
             double promedioLineaClase = contadorLineasPorClase.stream().mapToInt(Integer::intValue).average().orElse(0.0);
             double promedioLineaMetodo = contadorLineasPorMetodo.stream().mapToInt(Integer::intValue).average().orElse(0.0);
 
@@ -164,6 +185,10 @@ public class test {
                     .average()
                     .orElse(0.0);
             System.out.println("Promedio general de longitud de identificadores: " + promedioTotalLargoIdentificadores);
+
+            // Imprimir la profundidad máxima de anidado condicional por método
+            profundidadAnidadoCondicional.forEach((metodo, cantidad) ->
+                    System.out.println("Profundidad de anidado condicional del metodo " + metodo + ": " + cantidad));
         }
     }
 }
