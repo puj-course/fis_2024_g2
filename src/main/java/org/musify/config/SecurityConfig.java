@@ -43,8 +43,8 @@ public class SecurityConfig {
                     auth.requestMatchers("/login").permitAll();
                     //Esta es una forma pero se puede volver un poco larga si hay muchos end points.
                     // Entonces, se puede hacer con anotaciones
-                    auth.requestMatchers("/usuario").hasRole("ADMIN");
-                    //auth.requestMatchers("/usuario").hasAnyRole("ADMIN", "PREMIUM"); //Para varios
+                   // auth.requestMatchers("/usuario").hasRole("ADMIN");
+                    auth.requestMatchers("/usuario").hasAnyRole("ADMIN", "PREMIUM"); //Para varios
 
                     auth.anyRequest().authenticated();
                 })
