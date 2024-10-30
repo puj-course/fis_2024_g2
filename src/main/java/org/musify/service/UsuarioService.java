@@ -9,5 +9,5 @@ public interface UsuarioService {
     public Usuario getUsuarioByNickname(String id);
     public Usuario getUsuarioById(String id);
     public Usuario crearUsuario(UsuarioRegistroDTO usuarioDTO, Usuario usuario);
-    UserDetails loadUserByNickname(String username) throws UsernameNotFoundException;
+//    UserDetails loadUserByNickname(String username) throws UsernameNotFoundException;
 }
