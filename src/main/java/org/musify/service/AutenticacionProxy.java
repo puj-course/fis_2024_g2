@@ -1,7 +1,6 @@
 package org.musify.service;
 
-public class AutenticacionProxy implements IAutenticacion {
-
+public class AutenticacionProxy implements IAutenticacion{
     private Autenticacion autenticacionReal;  // Referencia a la clase real de autenticación
     private boolean autenticacionInicial;     // Indicador para verificar autenticación inicial
 
@@ -12,8 +11,8 @@ public class AutenticacionProxy implements IAutenticacion {
     }
 
     @Override
-    public boolean autenticar(String email, String contraseña) {
-        autenticacionInicial = autenticacionReal.autenticar(email, contraseña);
+    public boolean autenticar(String nickname, String contraseña) {
+        autenticacionInicial = autenticacionReal.autenticar(nickname, contraseña);
         if (autenticacionInicial) {
             System.out.println("Proxy: Usuario autenticado exitosamente.");
         } else {
@@ -42,3 +41,4 @@ public class AutenticacionProxy implements IAutenticacion {
         }
     }
 }
+
