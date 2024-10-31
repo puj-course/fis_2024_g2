@@ -25,7 +25,7 @@ public class test {
     public static void main(String[] args) {
         try {
             // Ruta del directorio de código fuente a analizar
-            Path pathProyecto = Paths.get("C:\\Users\\SEBASTIAN\\OneDrive\\Escritorio\\fis_2024_g2\\src\\main\\java");
+            Path pathProyecto = Paths.get("/home/valkyrie/Documents/Javeriana/sem4/FundamentosIngesoft/fis_2024_g2/src/main/java");
 
             // Recorrer todos los archivos .java del directorio
             Files.walk(pathProyecto)
@@ -114,12 +114,12 @@ public class test {
                 int p = 1; // Asumimos un solo componente conectado
 
                 // Contar nodos de decisión (if, for, while, do-while, switch)
-                int decisionNodes = md.findAll(IfStmt.class).size() +
+                int decisiones = md.findAll(IfStmt.class).size() +
                         md.findAll(ForStmt.class).size() +
                         md.findAll(WhileStmt.class).size() +
                         md.findAll(DoStmt.class).size() +
                         md.findAll(SwitchStmt.class).size();
-                nodos += decisionNodes;
+                nodos += decisiones;
                 nodos += 1; // Nodo inicial del método
 
                 // Contar arcos (cada nodo de decisión tiene un arco de entrada y uno o más de salida)
