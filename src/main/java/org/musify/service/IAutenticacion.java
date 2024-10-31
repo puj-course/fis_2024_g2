@@ -5,3 +5,4 @@ public interface IAutenticacion {
     boolean enviarCodigoSMS(String numeroTelefono);
     boolean verificarCodigoSMS(String codigo);
 }
+
