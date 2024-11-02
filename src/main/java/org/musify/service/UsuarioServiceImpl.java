@@ -1,18 +1,25 @@
 package org.musify.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.musify.model.Usuario;
-import org.musify.model.UsuarioRegistroDTO;
+import org.musify.model.*;
 import org.musify.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -51,4 +58,72 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
     }
 
+    //Este método busca un usuario en la DB y lo convierte en
+    //un User de SpringSecurity
+//    @Override
+//    public UserDetails loadUserByNickname(String username) throws UsernameNotFoundException {
+//        // Buscar el usuario según su username
+//        Usuario usuario = usuarioRepository.findByNickname(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("El usuario " + username + " no existe"));
+//
+//        // Determinar el rol según el tipo de usuario concreto
+//        String role;
+//        if (usuario instanceof UsuarioGratuito) {
+//            role = "ROLE_USER";
+//        } else if (usuario instanceof UsuarioPremium) {
+//            role = "ROLE_PREMIUM";
+//        } else if (usuario instanceof Administrador) {
+//            role = "ROLE_ADMIN";
+//        } else {
+//            throw new IllegalStateException("Tipo de usuario no reconocido");
+//        }
+//
+//        // Crear los authorities basados en el tipo de usuario determinado
+//        Collection<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
+//
+//        // Retornar un objeto User de Spring Security con los valores true por defecto para las otras propiedades
+//        return new User(
+//                usuario.getNickname(),
+//                usuario.getContra(),
+//                true, // enabled ->Indica si cuenta de usuario está habilitada
+//                true, // accountNonExpired -> No expirada
+//                true, // credentialsNonExpired ->Credenciales no expiradas
+//                true, // accountNonLocked ->Cuenta no bloqueada
+//                authorities
+//        );
+//    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // Buscar el usuario según su username
+        Usuario usuario = usuarioRepository.findByNickname(username)
+                .orElseThrow(() -> new UsernameNotFoundException("El usuario " + username + " no existe"));
+
+        // Determinar el rol según el tipo de usuario concreto
+        String role;
+        if (usuario instanceof UsuarioGratuito) {
+            role = "ROLE_USER";
+        } else if (usuario instanceof UsuarioPremium) {
+            role = "ROLE_PREMIUM";
+        } else if (usuario instanceof Administrador) {
+            role = "ROLE_ADMIN";
+        } else {
+            throw new IllegalStateException("Tipo de usuario no reconocido");
+        }
+
+        // Crear los authorities basados en el tipo de usuario determinado
+        Collection<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
+
+        // Retornar un objeto User de Spring Security con los valores true por defecto para las otras propiedades
+        return new User(
+                usuario.getNickname(),
+                usuario.getContra(),
+                true, // enabled ->Indica si cuenta de usuario está habilitada
+                true, // accountNonExpired -> No expirada
+                true, // credentialsNonExpired ->Credenciales no expiradas
+                true, // accountNonLocked ->Cuenta no bloqueada
+                authorities
+        );
+    }
 }

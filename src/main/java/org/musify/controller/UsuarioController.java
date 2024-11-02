@@ -9,6 +9,8 @@ import org.musify.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,6 +22,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+
 
     @GetMapping("/{nickname}")
     public ResponseEntity<?> getUsuarioByNickname(@PathVariable String nickname) {
@@ -56,6 +60,10 @@ public class UsuarioController {
         try {
             // Llama al método en service
             Usuario nuevoUsuario = UsuarioFactory.crearUsuarioPorRol(u.getRol());
+
+            //Se encripta la contraseña antes de guardar en la base de datos
+            String contraEncriptada = new BCryptPasswordEncoder().encode(u.getContra());
+            u.setContra(contraEncriptada);
             nuevoUsuario=usuarioService.crearUsuario(u, nuevoUsuario);
 
             // Crear la URI para retornar la ubicación del nuevo usuario
