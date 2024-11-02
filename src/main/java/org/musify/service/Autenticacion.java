@@ -1,10 +1,12 @@
 package org.musify.service;
 
 import org.musify.model.Usuario;
-import java.util.*;
+
+
+import java.util.ArrayList;
 
 public class Autenticacion implements IAutenticacion{
-    private ArrayList <Usuario> usuariosRegistrados;
+    private ArrayList<Usuario> usuariosRegistrados;
     private String codigoVerificacionActual;
     VonageSmsService vonageSmsService;
 
@@ -38,21 +40,21 @@ public class Autenticacion implements IAutenticacion{
     }
 
     @Override
-    public boolean autenticar(String nickname, String contraseña) {
-        Usuario usuario = usuariosRegistrados.get(Integer.parseInt(nickname));
-        if (usuario != null && usuario.getContra().equals(contraseña)) {
-            System.out.println("Autenticación exitosa para el usuario: " + nickname);
-            return true;
-        } else {
-            System.out.println("Credenciales incorrectas para el usuario: " + nickname);
-            return false;
+    public boolean autenticar(String nickname, String contrasenia) {
+        for (Usuario usuario : usuariosRegistrados) {
+            if (usuario.getNickname().equals(nickname) && usuario.getContra().equals(contrasenia)) {
+                System.out.println("Autenticación exitosa para el usuario: " + nickname);
+                return true;
+            }
         }
+        System.out.println("Credenciales incorrectas para el usuario: " + nickname);
+        return false;
     }
 
     @Override
     public boolean enviarCodigoSMS(String numeroTelefono) {
         this.codigoVerificacionActual = generarCodigoVerificacion();
-        String mensaje = "Tu código de verificación es: " + codigoVerificacionActual;
+        String mensaje = "Tu codigo de verificacion es: " + codigoVerificacionActual;
         return vonageSmsService.enviarSMS(numeroTelefono, mensaje);
     }
 
