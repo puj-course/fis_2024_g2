@@ -18,11 +18,11 @@ public class CancionesXAlbum {
 
     @ManyToOne
     @MapsId("cancionId")  // Mapea el campo cancionId en CancionAlbumId
-    @JoinColumn(name = "cancion_id_cancion")  // Nombre de columna en la tabla
+    @JoinColumn(name = "cancion_id_cancion")
     private Cancion cancion;
 
     @ManyToOne
     @MapsId("albumId")  // Mapea el campo albumId en CancionAlbumId
-    @JoinColumn(name = "album_id_album")  // Nombre de columna en la tabla
+    @JoinColumn(name = "album_id_album")
     private Album album;
 }
