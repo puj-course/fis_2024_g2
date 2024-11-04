@@ -1,6 +1,7 @@
-package org.musify.model;
+package org.musify.model.artista;
 
 import jakarta.persistence.*;
+import org.musify.model.usuario.Usuario;
 
 import java.sql.Date;
 

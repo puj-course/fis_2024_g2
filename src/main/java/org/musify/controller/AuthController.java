@@ -1,6 +1,6 @@
 package org.musify.controller;
 
-import org.musify.model.UsuarioLoginDTO;
+import org.musify.model.usuario.UsuarioLoginDTO;
 import org.musify.security.AuthResponse;
 import org.musify.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,7 @@
 package org.musify.service;
 
-import org.musify.model.*;
+import org.musify.model.album.Album;
+import org.musify.model.album.AlbumDTO;
 import org.musify.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,10 @@
 package org.musify.service;
 
-import org.musify.model.*;
+import org.musify.model.album.Album;
+import org.musify.model.cancion.Cancion;
+import org.musify.model.cancionesXAlbum.CancionesXAlbum;
+import org.musify.model.cancionesXAlbum.CancionesXAlbumDTO;
+import org.musify.model.cancionesXAlbum.CancionesXAlbumId;
 import org.musify.repository.AlbumRepository;
 import org.musify.repository.CancionRepository;
 import org.musify.repository.CancionesXAlbumRepository;
@@ -23,10 +27,8 @@ public class CancionesXAlbumServiceImpl {
         Cancion cancion = cancionRepository.findById(cancionesXAlbumDTO.getIdCancion())
                 .orElseThrow(() -> new RuntimeException("Cancion no encontrada"));
 
-        System.out.println("ACA LLEGADA: " + cancionesXAlbumDTO.getIdCancion());
         Album album = albumRepository.findById(cancionesXAlbumDTO.getIdAlbum())
                 .orElseThrow(() -> new RuntimeException("Album no encontrado"));
-        System.out.println("ACA LLEGADA: " + cancionesXAlbumDTO.getIdAlbum());
         CancionesXAlbum cancionesXAlbum = new CancionesXAlbum();
         cancionesXAlbum.setCancion(cancion);
         cancionesXAlbum.setAlbum(album);
@@ -35,7 +37,6 @@ public class CancionesXAlbumServiceImpl {
         CancionesXAlbumId id = new CancionesXAlbumId(cancionesXAlbumDTO.getIdCancion(), cancionesXAlbumDTO.getIdAlbum());
         cancionesXAlbum.setId(id);
 
-        System.out.println("ACABA EL SERVICIO");
         return cancionesXAlbumRepository.save(cancionesXAlbum);
     }
 }

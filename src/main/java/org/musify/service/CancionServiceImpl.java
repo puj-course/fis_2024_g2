@@ -2,6 +2,8 @@ package org.musify.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.*;
+import org.musify.model.cancion.Cancion;
+import org.musify.model.cancion.CancionDTO;
 import org.musify.repository.CancionRepository;
 import org.musify.repository.EmpresaDiscograficaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

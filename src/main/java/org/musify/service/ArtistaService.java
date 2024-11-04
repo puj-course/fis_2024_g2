@@ -1,7 +1,7 @@
 package org.musify.service;
 
-import org.musify.model.Artista;
-import org.musify.model.ArtistaDTO;
+import org.musify.model.artista.Artista;
+import org.musify.model.artista.ArtistaDTO;
 
 public interface ArtistaService {
     public Artista getArtista(String nombreArtistico);

@@ -1,8 +1,8 @@
 package org.musify.controller;
 
 
-import org.musify.model.Album;
-import org.musify.model.AlbumDTO;
+import org.musify.model.album.Album;
+import org.musify.model.album.AlbumDTO;
 import org.musify.service.AlbumServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class AlbumController {
     @Autowired
     AlbumServiceImpl albumService;
 
-    @PostMapping
+    @PostMapping("/crearAlbum")
     public ResponseEntity<?> postAlbum(@RequestBody AlbumDTO albumDTO) {
         try {
             // Llama al método en service

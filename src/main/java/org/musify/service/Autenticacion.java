@@ -1,6 +1,6 @@
 package org.musify.service;
 
-import org.musify.model.Usuario;
+import org.musify.model.usuario.Usuario;
 
 
 import java.util.ArrayList;

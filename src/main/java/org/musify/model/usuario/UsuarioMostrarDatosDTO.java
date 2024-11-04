@@ -1,4 +1,4 @@
-package org.musify.model;
+package org.musify.model.usuario;
 
 public class UsuarioMostrarDatosDTO {
 }

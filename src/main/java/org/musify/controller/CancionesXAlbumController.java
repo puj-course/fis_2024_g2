@@ -1,8 +1,8 @@
 package org.musify.controller;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.musify.model.CancionesXAlbum;
-import org.musify.model.CancionesXAlbumDTO;
+import org.musify.model.cancionesXAlbum.CancionesXAlbum;
+import org.musify.model.cancionesXAlbum.CancionesXAlbumDTO;
 import org.musify.service.CancionesXAlbumServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,6 @@ public class CancionesXAlbumController {
                     .path("/{id}")
                     .buildAndExpand(nuevaRelacion.getId())  // Asegúrate de que tengas un método getId() que retorne la clave primaria de la relación
                     .toUri();
-            System.out.println("ACABA EL CONTROLLER");
             return ResponseEntity.created(location).body(nuevaRelacion);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
