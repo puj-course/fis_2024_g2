@@ -1,4 +1,4 @@
-package org.musify.model;
+package org.musify.model.generosXCancion;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.musify.model.cancionesXAlbum.CancionesXAlbumId;
 
 import java.io.Serializable;
 import java.util.Objects;
