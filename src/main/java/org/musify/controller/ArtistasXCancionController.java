@@ -23,7 +23,7 @@ public class ArtistasXCancionController {
     ArtistasXCancionServiceImpl artistasXCancionService;
 
     @PostMapping("/relacionar")
-    public ResponseEntity<?> relacionarArtistaYAlbum(@RequestBody ArtistasXCancionDTO artistasXCancionDTO) {
+    public ResponseEntity<?> relacionarArtistaYCancion(@RequestBody ArtistasXCancionDTO artistasXCancionDTO) {
         try {
             // Llama al método en el servicio para crear la relación
             ArtistasXCancion nuevaRelacion = artistasXCancionService.relacionarArtistaYcancion(artistasXCancionDTO);
