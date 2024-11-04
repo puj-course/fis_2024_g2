@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.artista.Artista;
 import org.musify.model.artista.ArtistaDTO;
 import org.musify.model.usuario.Usuario;
+import org.musify.model.usuario.UsuarioMostrarDatosDTO;
 import org.musify.repository.ArtistaRepository;
 import org.musify.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistaServiceImpl implements ArtistaService{
@@ -43,6 +46,13 @@ public class ArtistaServiceImpl implements ArtistaService{
         nuevoArtista.setNombreArtistico(artista.getNombreArtistico());
         nuevoArtista.setBiografia(artista.getBiografia());
         return artistaRepository.save(nuevoArtista);
+    }
+
+    public List<ArtistaDTO> getArtistas(){
+        return artistaRepository.findAll()
+                .stream()
+                .map(ArtistaDTO::new)
+                .collect(Collectors.toList());
     }
 
 }

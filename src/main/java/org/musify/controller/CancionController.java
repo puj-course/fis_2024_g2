@@ -1,24 +1,24 @@
 package org.musify.controller;
 
+
 import org.musify.model.cancion.Cancion;
 import org.musify.model.cancion.CancionDTO;
 import org.musify.service.AudioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cancion")
 public class CancionController {
     @Autowired
     private AudioService audioService;
+
 
     @PostMapping("/crearCancion")
     public ResponseEntity<?> postCancion(@RequestBody CancionDTO cancionDTO) {
@@ -39,4 +39,14 @@ public class CancionController {
                     .body("Error al crear la cancion: " + e.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity<List<CancionDTO>> getCanciones() {
+        List<CancionDTO> canciones = audioService.getCanciones();
+        if (canciones.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(canciones);
+    }
+
 }

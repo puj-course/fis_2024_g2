@@ -3,17 +3,16 @@ package org.musify.controller;
 
 import org.musify.model.album.Album;
 import org.musify.model.album.AlbumDTO;
+import org.musify.model.artista.ArtistaDTO;
 import org.musify.service.AlbumServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/album")
@@ -39,6 +38,14 @@ public class AlbumController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al crear el album: " + e.getMessage());
         }
+    }
+    @GetMapping
+    public ResponseEntity<List<AlbumDTO>> getAlbumes() {
+        List<AlbumDTO> albumes = albumService.getAlbumes();
+        if (albumes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(albumes);
     }
 
 }

@@ -5,11 +5,15 @@ import org.musify.model.artistasXCancion.ArtistasXCancion;
 import org.musify.model.artistasXCancion.ArtistasXCancionDTO;
 import org.musify.model.artistasXCancion.ArtistasXCancionId;
 import org.musify.model.cancion.Cancion;
+import org.musify.model.cancion.CancionDTO;
 import org.musify.repository.ArtistaRepository;
 import org.musify.repository.ArtistasXCancionRepository;
 import org.musify.repository.CancionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistasXCancionServiceImpl {
@@ -36,5 +40,13 @@ public class ArtistasXCancionServiceImpl {
         artistasXCancion.setId(id);
 
         return artistasXCancionRepository.save(artistasXCancion);
+    }
+
+    public List<CancionDTO> getCancionesByNombreArtista(String nombreArtista) {
+        List<Cancion> canciones = artistasXCancionRepository.getCancionesByNombreArtista(nombreArtista);
+        // Convertir cada Cancion a CancionDTO
+        return canciones.stream()
+                .map(CancionDTO::new)
+                .collect(Collectors.toList());
     }
 }

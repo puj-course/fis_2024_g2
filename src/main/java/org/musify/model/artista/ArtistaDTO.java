@@ -11,6 +11,11 @@ public class ArtistaDTO {
         this.biografia = biografia;
         this.usuarioId = usuarioId;
     }
+    public ArtistaDTO(Artista a) {
+        this.nombreArtistico = a.getNombreArtistico();
+        this.biografia = a.getBiografia();
+        this.usuarioId = a.getIdUsuario();
+    }
 
     public String getNombreArtistico() {
         return nombreArtistico;

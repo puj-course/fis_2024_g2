@@ -1,7 +1,10 @@
 package org.musify.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.album.Album;
+import org.musify.model.artista.Artista;
 import org.musify.model.cancion.Cancion;
+import org.musify.model.cancion.CancionDTO;
 import org.musify.model.cancionesXAlbum.CancionesXAlbum;
 import org.musify.model.cancionesXAlbum.CancionesXAlbumDTO;
 import org.musify.model.cancionesXAlbum.CancionesXAlbumId;
@@ -9,7 +12,12 @@ import org.musify.repository.AlbumRepository;
 import org.musify.repository.CancionRepository;
 import org.musify.repository.CancionesXAlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CancionesXAlbumServiceImpl {
@@ -39,4 +47,14 @@ public class CancionesXAlbumServiceImpl {
 
         return cancionesXAlbumRepository.save(cancionesXAlbum);
     }
+
+    public List<CancionDTO> getCancionesByNombreAlbum(String nombreAlbum) {
+        List<Cancion> canciones = cancionesXAlbumRepository.getCancionesByNombreAlbum(nombreAlbum);
+        // Convertir cada Cancion a CancionDTO
+        return canciones.stream()
+                .map(CancionDTO::new)
+                .collect(Collectors.toList());
+    }
+
+
 }

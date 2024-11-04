@@ -3,6 +3,7 @@ package org.musify.controller;
 import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.usuario.Usuario;
 import org.musify.model.usuario.UsuarioFactory;
+import org.musify.model.usuario.UsuarioMostrarDatosDTO;
 import org.musify.model.usuario.UsuarioRegistroDTO;
 import org.musify.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")
@@ -77,6 +80,16 @@ public class UsuarioController {
                     .body("Error al crear el usuario: " + e.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioMostrarDatosDTO>> getUsuarios() {
+        List<UsuarioMostrarDatosDTO> usuarios = usuarioService.getUsuarios();
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(usuarios);
+    }
+
 
 }
 

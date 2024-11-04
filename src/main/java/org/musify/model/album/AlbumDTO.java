@@ -16,4 +16,10 @@ public class AlbumDTO {
     private String nombre;
     private Date fechaLanzamiento;
     private String imagenUrl;
+
+    public AlbumDTO(Album album) {
+        this.nombre = album.getNombre();
+        this.fechaLanzamiento=album.getFechaLanzamiento();
+        this.imagenUrl = album.getImagenUrl();
+    }
 }

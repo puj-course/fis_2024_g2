@@ -38,7 +38,9 @@ public class Artista {
         this.fechaRegistroArtista = fechaRegistroArtista;
         this.biografia = biografia;
     }
-
+    public String getIdUsuario(){
+        return usuario.getId_usuario();
+    }
     // Getters y Setters
     public String getIdArtista() {
         return idArtista;

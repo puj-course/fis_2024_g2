@@ -1,6 +1,7 @@
 package org.musify.controller;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.musify.model.cancion.CancionDTO;
 import org.musify.model.cancionesXAlbum.CancionesXAlbum;
 import org.musify.model.cancionesXAlbum.CancionesXAlbumDTO;
 import org.musify.service.CancionesXAlbumServiceImpl;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/canciones_album")
@@ -37,6 +39,24 @@ public class CancionesXAlbumController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al crear la relación: " + e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getCancionesByAlbum(@RequestParam String nombreAlbum) {
+        try {
+            List<CancionDTO> canciones = cancionAlbumService.getCancionesByNombreAlbum(nombreAlbum);
+
+            if (canciones == null || canciones.isEmpty()) {
+                return ResponseEntity.notFound().build(); // Se retorna 404 si no hay canciones
+            }
+
+            return ResponseEntity.ok(canciones);
+
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Álbum no encontrado: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor");
         }
     }
 
