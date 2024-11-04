@@ -83,11 +83,11 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<UsuarioMostrarDatosDTO>> getUsuarios() {
-        List<UsuarioMostrarDatosDTO> products = usuarioService.getUsuarios();
-        if (products.isEmpty()) {
+        List<UsuarioMostrarDatosDTO> usuarios = usuarioService.getUsuarios();
+        if (usuarios.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(products);
+        return ResponseEntity.ok(usuarios);
     }
 
 

@@ -3,6 +3,7 @@ package org.musify.controller;
 import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.artista.Artista;
 import org.musify.model.artista.ArtistaDTO;
+import org.musify.model.usuario.UsuarioMostrarDatosDTO;
 import org.musify.service.ArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/artista")
@@ -54,6 +56,14 @@ public class ArtistaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al crear el artista: " + e.getMessage());
         }
+    }
+    @GetMapping
+    public ResponseEntity<List<ArtistaDTO>> getArtistas() {
+        List<ArtistaDTO> artistas = artistaService.getArtistas();
+        if (artistas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(artistas);
     }
 
 
