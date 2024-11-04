@@ -16,7 +16,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
@@ -29,6 +31,13 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     public Usuario getUsuarioById(String id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+    }
+
+    public List<UsuarioMostrarDatosDTO> getUsuarios() {
+        return usuarioRepository.findAll()
+                .stream()
+                .map(UsuarioMostrarDatosDTO::new) // Usamos el constructor de UsuarioMostrarDatosDTO
+                .collect(Collectors.toList());
     }
 
     @Override
