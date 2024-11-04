@@ -19,4 +19,14 @@ public class CancionDTO {
     private String audioUrl;
     private String imagenUrl;
     private String empresaDiscograficaId;
+
+    public CancionDTO(Cancion cancion) {
+        this.nombre = cancion.getNombre();
+        this.duracion = cancion.getDuracion();
+        this.fechaLanzamiento = cancion.getFechaLanzamiento();
+        this.letra = cancion.getLetra();
+        this.audioUrl = cancion.getAudioUrl();
+        this.imagenUrl = cancion.getImagenUrl();
+        this.empresaDiscograficaId = cancion.getEmpresaDiscograficaId();
+    }
 }

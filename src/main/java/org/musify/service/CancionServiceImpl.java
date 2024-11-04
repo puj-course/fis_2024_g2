@@ -2,6 +2,7 @@ package org.musify.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.*;
+import org.musify.model.album.AlbumDTO;
 import org.musify.model.cancion.Cancion;
 import org.musify.model.cancion.CancionDTO;
 import org.musify.repository.CancionRepository;
@@ -9,7 +10,9 @@ import org.musify.repository.EmpresaDiscograficaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class CancionServiceImpl implements  AudioService{
@@ -39,5 +42,11 @@ public class CancionServiceImpl implements  AudioService{
         nuevaCancion.setIdCancion(idAleatorio.replace("-", ""));
 
         return cancionRepository.save(nuevaCancion);
+    }
+    public List<CancionDTO> getCanciones(){
+        return cancionRepository.findAll()
+                .stream()
+                .map(CancionDTO::new)
+                .collect(Collectors.toList());
     }
 }
