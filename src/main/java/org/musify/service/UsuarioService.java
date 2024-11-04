@@ -1,9 +1,7 @@
 package org.musify.service;
 
-import org.musify.model.Usuario;
-import org.musify.model.UsuarioRegistroDTO;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.musify.model.usuario.Usuario;
+import org.musify.model.usuario.UsuarioRegistroDTO;
 
 public interface UsuarioService {
     public Usuario getUsuarioByNickname(String id);

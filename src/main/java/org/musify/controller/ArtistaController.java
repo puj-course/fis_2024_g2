@@ -1,8 +1,8 @@
 package org.musify.controller;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.musify.model.Artista;
-import org.musify.model.ArtistaDTO;
+import org.musify.model.artista.Artista;
+import org.musify.model.artista.ArtistaDTO;
 import org.musify.service.ArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

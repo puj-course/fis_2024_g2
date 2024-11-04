@@ -1,4 +1,4 @@
-package org.musify.model;
+package org.musify.model.cancionesXAlbum;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,10 +1,12 @@
-package org.musify.model;
+package org.musify.model.usuario;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
+import org.musify.model.usuario.UsuarioGratuito;
+import org.musify.model.usuario.UsuarioPremium;
+import org.musify.model.usuario.Administrador;
 
 import java.sql.Date;
 

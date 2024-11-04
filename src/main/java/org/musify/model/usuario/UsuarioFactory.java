@@ -1,10 +1,15 @@
-package org.musify.model;
+package org.musify.model.usuario;
+
+import org.musify.model.usuario.UsuarioGratuito;
+import org.musify.model.usuario.UsuarioPremium;
+import org.musify.model.usuario.Administrador;
+import org.musify.model.usuario.TipoUsuario;
 
 import java.sql.Date;
 
 public class UsuarioFactory {
 
-    public static Usuario crearUsuarioPorRol(String rol) {
+    public static org.musify.model.usuario.Usuario crearUsuarioPorRol(String rol) {
         switch (rol.toLowerCase()) {
             case "premium":
                 return new UsuarioPremium();
@@ -18,7 +23,7 @@ public class UsuarioFactory {
     }
 
 
-    public static Usuario crearUsuario(TipoUsuario tipo, String idUsuario, String nombres, String apellidos,
+    public static Usuario crearUsuario(org.musify.model.usuario.TipoUsuario tipo, String idUsuario, String nombres, String apellidos,
                                        String nickname, String email, String contraseña,
                                        String fotoPerfilUrl, Date fechaNacimiento,
                                        Date fechaRegistro, String estado,

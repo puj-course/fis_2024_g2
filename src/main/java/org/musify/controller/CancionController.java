@@ -1,8 +1,7 @@
 package org.musify.controller;
 
-import org.musify.model.Cancion;
-import org.musify.model.CancionDTO;
-import org.musify.repository.CancionRepository;
+import org.musify.model.cancion.Cancion;
+import org.musify.model.cancion.CancionDTO;
 import org.musify.service.AudioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

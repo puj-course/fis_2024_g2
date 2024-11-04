@@ -1,6 +1,6 @@
 package org.musify.repository;
 
-import org.musify.model.Artista;
+import org.musify.model.artista.Artista;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

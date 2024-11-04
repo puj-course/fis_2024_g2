@@ -1,4 +1,4 @@
-package org.musify.model;
+package org.musify.model.cancionesXAlbum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

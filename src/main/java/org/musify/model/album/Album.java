@@ -1,4 +1,4 @@
-package org.musify.model;
+package org.musify.model.album;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -8,7 +8,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.musify.model.UsuarioLoginDTO;
+import org.musify.model.usuario.UsuarioLoginDTO;
 import org.musify.security.JwtUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

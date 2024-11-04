@@ -1,7 +1,7 @@
 package org.musify.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.musify.model.*;
+import org.musify.model.usuario.*;
 import org.musify.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,7 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
 
     @Override
-    public Usuario crearUsuario(UsuarioRegistroDTO usuarioDTO, Usuario usuario) {
+    public Usuario crearUsuario(org.musify.model.usuario.UsuarioRegistroDTO usuarioDTO, Usuario usuario) {
 
         //Pasar los datos del DTO al usuario nuevo
         usuario.setNombres(usuarioDTO.getNombres());
@@ -102,9 +102,9 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
         // Determinar el rol según el tipo de usuario concreto
         String role;
-        if (usuario instanceof UsuarioGratuito) {
+        if (usuario instanceof org.musify.model.usuario.UsuarioGratuito) {
             role = "ROLE_USER";
-        } else if (usuario instanceof UsuarioPremium) {
+        } else if (usuario instanceof org.musify.model.usuario.UsuarioPremium) {
             role = "ROLE_PREMIUM";
         } else if (usuario instanceof Administrador) {
             role = "ROLE_ADMIN";
