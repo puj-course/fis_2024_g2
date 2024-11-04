@@ -1,9 +1,11 @@
 package org.musify.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.musify.model.album.AlbumDTO;
 import org.musify.model.cancion.Cancion;
 import org.musify.model.cancion.CancionDTO;
 import org.musify.service.AudioService;
+import org.musify.service.CancionesXAlbumServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ import java.util.List;
 public class CancionController {
     @Autowired
     private AudioService audioService;
+
+    @Autowired
+    private CancionesXAlbumServiceImpl cancionesXAlbumService;
 
     @PostMapping("/crearCancion")
     public ResponseEntity<?> postCancion(@RequestBody CancionDTO cancionDTO) {
@@ -47,4 +52,23 @@ public class CancionController {
         }
         return ResponseEntity.ok(canciones);
     }
+    @GetMapping("/por-album")
+    public ResponseEntity<?> getCancionesByAlbum(@RequestParam String nombreAlbum) {
+        try {
+            List<CancionDTO> canciones = cancionesXAlbumService.getCancionesByNombreAlbum(nombreAlbum);
+
+            if (canciones == null || canciones.isEmpty()) {
+                return ResponseEntity.notFound().build(); // Se retorna 404 si no hay canciones
+            }
+
+            return ResponseEntity.ok(canciones);
+
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Álbum no encontrado: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor");
+        }
+    }
+
+
 }
