@@ -36,7 +36,7 @@ public class ArtistaController {
 
     }
 
-    @PostMapping
+    @PostMapping("/crearArtista")
     public ResponseEntity<?> postArtista(@RequestBody ArtistaDTO a) {
         try {
             // Llama al método en service

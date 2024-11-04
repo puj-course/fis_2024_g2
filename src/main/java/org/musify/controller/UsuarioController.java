@@ -55,7 +55,7 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/crearUsuario")
     public ResponseEntity<?> postUsuario(@RequestBody UsuarioRegistroDTO u) {
         try {
             // Llama al método en service

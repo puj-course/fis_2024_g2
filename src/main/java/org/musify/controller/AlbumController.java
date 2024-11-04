@@ -21,7 +21,7 @@ public class AlbumController {
     @Autowired
     AlbumServiceImpl albumService;
 
-    @PostMapping
+    @PostMapping("/crearAlbum")
     public ResponseEntity<?> postAlbum(@RequestBody AlbumDTO albumDTO) {
         try {
             // Llama al método en service

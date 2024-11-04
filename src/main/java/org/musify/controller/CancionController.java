@@ -21,7 +21,7 @@ public class CancionController {
     @Autowired
     private AudioService audioService;
 
-    @PostMapping
+    @PostMapping("/crearCancion")
     public ResponseEntity<?> postCancion(@RequestBody CancionDTO cancionDTO) {
         try {
             // Llama al método en service
