@@ -1,4 +1,4 @@
-package org.musify.model.usuario;
+package org.musify.model.generosXCancion;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.musify.model.GeneroMusical;
-import org.musify.model.generosXCancion.GenerosXCancionId;
 import org.musify.model.cancion.Cancion;
 
 @Getter

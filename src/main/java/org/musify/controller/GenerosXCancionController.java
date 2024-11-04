@@ -1,7 +1,7 @@
 package org.musify.controller;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.musify.model.usuario.GenerosXCancion;
+import org.musify.model.generosXCancion.GenerosXCancion;
 import org.musify.model.generosXCancion.GenerosXCancionDTO;
 import org.musify.service.GenerosXCancionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

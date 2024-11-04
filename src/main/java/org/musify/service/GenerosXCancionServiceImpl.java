@@ -1,7 +1,7 @@
 package org.musify.service;
 
 import org.musify.model.GeneroMusical;
-import org.musify.model.usuario.GenerosXCancion;
+import org.musify.model.generosXCancion.GenerosXCancion;
 import org.musify.model.generosXCancion.GenerosXCancionDTO;
 import org.musify.model.generosXCancion.GenerosXCancionId;
 import org.musify.model.cancion.Cancion;
