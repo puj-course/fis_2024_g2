@@ -30,7 +30,7 @@ const AlbumPage = () => {
             console.error(error);
         }
     }
-    
+
     return (
         <div className="p-8">
             <h1 className="text-3xl mb-4">Albums</h1>

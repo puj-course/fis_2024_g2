@@ -20,7 +20,7 @@ const SideBar = ({ children, expanded, setExpanded }) => {
     return (
         <aside
             className={`
-                    h-screen transition-all fixed top-0 left-0 text-[#8151e9] select-none
+                    h-screen transition-all fixed top-0 left-0 text-[#8151e9] select-none z-50
                     ${expanded ? "w-72" : "w-[72px]"}  
                 `}
         >

@@ -1,34 +1,37 @@
-import { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 //Componentes propios
-import SideBar, { SideBarItem } from '../../components/sidebar/SideBar';
-import Header from '../../components/header/Header';
+import SideBar, { SideBarItem } from "../../components/sidebar/SideBar";
+import Header from "../../components/header/Header";
+import PlayerComponent from "../../components/player/PlayerComponent";
 
 //Iconos de la sidebar
-import { BsHouseDoor } from 'react-icons/bs';
+import { BsHouseDoor } from "react-icons/bs";
 import { RiAlbumLine } from "react-icons/ri";
 import { TiMicrophoneOutline } from "react-icons/ti";
 
 const MainPage = () => {
-    const [expanded, setExpanded] = useState(true); 
+    const [expanded, setExpanded] = useState(true);
     const location = useLocation();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(token == null) {
-            navigate('/login');
+        if (token == null) {
+            navigate("/login");
         }
-
     }, []);
 
     return (
-            <div className="main-page-container">
+        <div className="main-page-container">
             <SideBar expanded={expanded} setExpanded={setExpanded}>
                 <SideBarItem
                     text="Home"
-                    active={location.pathname === "/home" || location.pathname === "/"}
+                    active={
+                        location.pathname === "/home" ||
+                        location.pathname === "/"
+                    }
                     path="/home"
                     icon={<BsHouseDoor size={20} />}
                 ></SideBarItem>
@@ -55,6 +58,8 @@ const MainPage = () => {
                 <Header />
                 <Outlet />
             </div>
+
+            <PlayerComponent />
         </div>
     );
 };
