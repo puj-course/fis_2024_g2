@@ -1,7 +1,50 @@
+import { useEffect, useState } from "react";
+import Album from "../../components/album/Album";
+
 const AlbumPage = () => {
+    
+    const [albums, setAlbums] = useState([]);
+
+    useEffect(() => {
+        bringAlbums();
+    }, [])
+
+    const bringAlbums = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch("http://localhost:8080/album", {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            const data = await response.json();
+
+            if(response.ok) {
+                setAlbums(data);
+            } else {
+                console.error(data);
+            }
+        } catch(error) {
+            console.error(error);
+        }
+    }
+    
     return (
         <div className="p-8">
-            <h1 className="text-3xl">Albums</h1>
+            <h1 className="text-3xl mb-4">Albums</h1>
+
+            <div className="grid grid-cols-3 gap-6">
+                {
+
+                    albums.length > 0 ? (albums.map((album, index) => {
+                        return <Album key={index} nombre={album.nombre} imagenUrl={album.imagenUrl} fechaLanzamiento={album.fechaLanzamiento}></Album>
+                    })) : <h1>...</h1>
+
+                }
+
+            </div>
         </div>
     );
 }

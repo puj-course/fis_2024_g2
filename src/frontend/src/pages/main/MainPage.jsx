@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 //Componentes propios
 import SideBar, { SideBarItem } from '../../components/sidebar/SideBar';
@@ -13,9 +13,18 @@ import { TiMicrophoneOutline } from "react-icons/ti";
 const MainPage = () => {
     const [expanded, setExpanded] = useState(true); 
     const location = useLocation();
+    const token = localStorage.getItem('token');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(token == null) {
+            navigate('/login');
+        }
+
+    }, []);
 
     return (
-        <div className="main-page-container">
+            <div className="main-page-container">
             <SideBar expanded={expanded} setExpanded={setExpanded}>
                 <SideBarItem
                     text="Home"

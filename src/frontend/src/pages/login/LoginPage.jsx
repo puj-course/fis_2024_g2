@@ -6,18 +6,41 @@ import { useState } from 'react';
 
 const LoginPage = ({setAuth}) => {
     
-    const [username, setUsername] = useState('');
+    const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         // Implement your authentication logic here
-    if (username === '123' && password === '123') {
-        // setAuth(true);
-        navigate('/');
-      } else {
-        alert('Invalid credentials');
-      }
+        // For now, we'll just set the user as authenticated
+        try {
+            const response = await fetch('http://localhost:8080/login', {
+                method: 'POST',
+                headers: {
+                    'ContentType': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        nickname: nickname,
+                        password: password
+                    }
+                )
+            })
+
+            const data = await response.json();
+
+            if(response.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('nickname', nickname);
+                navigate('/');
+            } else {
+                alert("Error al iniciar sesión");
+            }
+
+        } catch(error) {
+            alert("Credenciales inválidas");
+        }
+
     }
     
     return (
@@ -30,7 +53,7 @@ const LoginPage = ({setAuth}) => {
                 </div>
 
                 <div className="input-box">
-                    <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
+                    <input type="text" placeholder="Username" onChange={(e) => setNickname(e.target.value)} required />
                     <i>
                         <BsPerson />
                     </i>
