@@ -4,17 +4,16 @@ import { usePlayer } from "../../../data/PlayerProvider";
 
 const LogOut = () => {
 
-    const { isPlaying, togglePlayPause } = usePlayer();
+    const { isPlaying, stopAudio, setIsPlaying } = usePlayer();
 
     const navigate = useNavigate();
 
     const logOut = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('nickname');
-        if(isPlaying) {
-            togglePlayPause();
-        }
+        stopAudio();
         navigate('/login');
+        window.location.reload();
     }
 
     return <CiLogout onClick={logOut} className="cursor-pointer text-xl"/>

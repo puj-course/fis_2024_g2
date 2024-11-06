@@ -13,6 +13,7 @@ import ArtistPage from './pages/artist/ArtistPage';
 import HomePage from './pages/home/HomePage';
 import MainPage from './pages/main/MainPage';
 import Album from "./pages/album/AlbumPage";
+import ProfilePage from "./pages/profile/profilePage";
 
 
 //Router
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/artist/:id',
         element: <ArtistPage />
+      },
+      {
+        path: '/profile/:nickname',
+        element: <ProfilePage />
       }
     ]
   }

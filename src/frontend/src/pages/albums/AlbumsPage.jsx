@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Album from "../../components/album/Album";
-
+import Spinner from "../../components/spinner/Spinner";
 const AlbumPage = () => {
     
     const [albums, setAlbums] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         bringAlbums();
@@ -23,12 +24,17 @@ const AlbumPage = () => {
 
             if(response.ok) {
                 setAlbums(data);
+                setLoading(false);
             } else {
                 console.error(data);
             }
         } catch(error) {
             console.error(error);
         }
+    }
+
+    if(loading) {
+        return <Spinner/>
     }
 
     return (

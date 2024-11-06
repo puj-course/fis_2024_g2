@@ -33,6 +33,7 @@ const LoginPage = ({setAuth}) => {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('nickname', nickname);
                 navigate('/');
+                window.location.reload();
             } else {
                 alert("Error al iniciar sesión");
             }

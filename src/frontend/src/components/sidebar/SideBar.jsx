@@ -137,6 +137,8 @@ const SideBarUserInfo = ({expanded}) => {
         bringUserInfo();
     })
 
+    const navigate = useNavigate();
+
     const bringUserInfo = async () => {
         try {
             const response = await fetch(`http://localhost:8080/usuario/${localStorage.getItem('nickname')}`, {
@@ -161,8 +163,12 @@ const SideBarUserInfo = ({expanded}) => {
         }
     } 
 
+    const handleNavigation = (path) => {
+        navigate(path)
+    }
+
     return (
-        <div className="flex justify-center p-3 h-16 ">
+        <div className="flex justify-center p-3 h-16 cursor-pointer" onClick={() => handleNavigation(`/profile/${name}`)}>
                     {/* <BsPersonCircle size={27} color="6837CE" /> */}
                     <img src={img} alt="imagen de usuario" className="w-[46px] h-[46px] rounded-full object-cover object-center" />
                     <div

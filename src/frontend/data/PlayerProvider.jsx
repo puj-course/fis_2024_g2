@@ -7,19 +7,19 @@ export const usePlayer = () => useContext(PlayerContext);
 
 export const PlayerProvider = ({ children }) => {
   const [currentTrack, setCurrentTrack] = useState(null);
-  const [currentTrackImg, setCurrentTrackImg] = useState(null);
+
   const [audio] = useState(new Audio());
   const [queue, setQueue] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     if (currentTrack) {
       audio.src = currentTrack.audioUrl;
       audio.play();
       setIsPlaying(true);
-      setCurrentTrackImg(currentTrack.imagenUrl);
 
       // Configurar duración de la canción actual
       audio.onloadedmetadata = () => {
@@ -47,6 +47,8 @@ export const PlayerProvider = ({ children }) => {
 
   const playTrack = (track) => {
     setCurrentTrack(track);
+    setCurrentTrackImg(track.songImg);
+    console.log(track.songImg);
   };
 
   const playNextTrack = () => {
@@ -65,8 +67,11 @@ export const PlayerProvider = ({ children }) => {
   const togglePlayPause = () => {
     if (isPlaying) {
       audio.pause();
+      setPaused(true);
+      setIsPlaying(false);
     } else {
       audio.play();
+      setPaused(false);
     }
     setIsPlaying(!isPlaying);
   };
@@ -79,11 +84,21 @@ export const PlayerProvider = ({ children }) => {
     audio.currentTime = Math.max(audio.currentTime - seconds, 0);
   };
 
+  const stopAudio = () => {
+    audio.pause();  // Detener la reproducción
+    audio.currentTime = 0;  // Resetear el tiempo de reproducción a 0
+    setPaused(false);
+    setIsPlaying(false);  // Actualizar el estado de isPlaying
+    setCurrentTrack(null);  // Limpiar la canción actual
+    setQueue([]);  // Vaciar la cola de canciones (si es necesario)
+    setCurrentTrackImg(null);  // Limpiar la imagen de la canción
+    audio.src = null;  // Asegurarse de que no haya ninguna fuente de audio
+  };
+
   return (
     <PlayerContext.Provider
       value={{
         currentTrack,
-        currentTrackImg,
         isPlaying,
         currentTime,
         duration,
@@ -93,6 +108,9 @@ export const PlayerProvider = ({ children }) => {
         addToQueue,
         skipForward,
         skipBackward,
+        paused,
+        stopAudio,
+
       }}
     >
       {children}

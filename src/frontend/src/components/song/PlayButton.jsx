@@ -13,7 +13,9 @@ const PlayButton = ({ songUrl, songName, songImg }) => {
 
     return (
         <div
-            onClick={() => playTrack(song)}
+            onClick={() => {
+                playTrack(song)
+            }}
             className={`flex items-center justify-center p-1.5 text-center rounded-full cursor-pointer bg-green-700`}
         >
             
