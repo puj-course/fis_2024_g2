@@ -1,9 +1,11 @@
 package org.musify.model.artista;
 
 import jakarta.persistence.*;
+import org.musify.model.cancion.Cancion;
 import org.musify.model.usuario.Usuario;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "artista")
@@ -25,6 +27,9 @@ public class Artista {
 
     @Column(name = "biografia", length = 100)
     private String biografia;
+
+    @ManyToMany(mappedBy = "artistas")
+    private List<Cancion> canciones;
 
     // Constructor por defecto
     public Artista() {
