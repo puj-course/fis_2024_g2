@@ -7,8 +7,38 @@ import { Carousel } from "../../components/Carousel/Carousel";
 
 //Dummy data
 import { musicData } from "../../../data/musicData";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
+    const [songs, setSongs] = useState([]);
+
+    useEffect(() => {
+        bringSongs();
+    }, [])
+
+    const bringSongs = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch(`http://localhost:8080/cancion`, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            const data = await response.json();
+
+            if(response.ok) {
+                setSongs(data);
+            } else {
+                console.log("upsi");
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
     return (
         <div className="p-4 min-h-screen">
             {/* Musify image */}
@@ -36,7 +66,16 @@ const HomePage = () => {
                 </div>
 
                 {/* Top songs */}
-                <SongList title="Top Songs ⬆️" songs={musicData.songs} howMuch={5}/>
+                {
+                    songs ?
+                    (
+                        <SongList title="Top Songs ⬆️" songs={songs} howMuch={5}/>
+                    )
+                    :
+                    (
+                        <h1>Las canciones mas escuchadas</h1>
+                    )
+                }
             </div>
         </div>
     );

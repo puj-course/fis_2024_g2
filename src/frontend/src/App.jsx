@@ -12,6 +12,8 @@ import ArtistsPage from './pages/artists/ArtistPage';
 import ArtistPage from './pages/artist/ArtistPage';
 import HomePage from './pages/home/HomePage';
 import MainPage from './pages/main/MainPage';
+import Album from "./pages/album/AlbumPage";
+import ProfilePage from "./pages/profile/profilePage";
 
 
 //Router
@@ -38,7 +40,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/albums',
-        element: <AlbumPage />
+        element: <AlbumPage />,
+      },
+      {
+        path: '/album/:name',
+        element: <Album />
       },
       {
         path: '/artists',
@@ -47,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/artist/:id',
         element: <ArtistPage />
+      },
+      {
+        path: '/profile/:nickname',
+        element: <ProfilePage />
       }
     ]
   }

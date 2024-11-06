@@ -8,8 +8,8 @@ const SongList = ({title, songs, howMuch}) => {
             <div className="flex flex-col gap-4 p-1">
                 
                 {
-                    songs?.slice(0, howMuch).map((song) => (
-                        <Song key={song.id} id={song.id} name={song.name} author={song.author} authorId={song.artistId} duration={song.duration} />
+                    songs?.slice(0, howMuch).map((song, index) => (
+                        <Song key={index} img={song.imagenUrl} name={song.nombre} author={song.author} authorId={song.artistId} duration={song.duracion} url={song.audioUrl}/>
                     ))
                 }
 

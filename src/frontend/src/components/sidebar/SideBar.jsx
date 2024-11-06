@@ -1,5 +1,5 @@
 //Dependencias
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Logo de musify
@@ -20,7 +20,7 @@ const SideBar = ({ children, expanded, setExpanded }) => {
     return (
         <aside
             className={`
-                    h-screen transition-all fixed top-0 left-0 text-[#8151e9] select-none
+                    h-screen transition-all fixed top-0 left-0 text-[#8151e9] select-none z-50
                     ${expanded ? "w-72" : "w-[72px]"}  
                 `}
         >
@@ -73,22 +73,7 @@ const SideBar = ({ children, expanded, setExpanded }) => {
                 </SideBarContext.Provider>
 
                 {/* Seccion de usuario, la parte de abajo */}
-                <div className="flex justify-center p-3 h-16 ">
-                    <BsPersonCircle size={27} color="6837CE" />
-                    <div
-                        className={`
-                        flex  flex-col justify-between items-start ml-3 
-                        overflow-hidden transition-all ${
-                            expanded ? "w-52" : "w-0"
-                        }    
-                    `}
-                    >
-                        <h4 className="dark:text-white">User</h4>
-                        <span className="text-xs text-gray-700 dark:text-gray-300">
-                            User info
-                        </span>
-                    </div>
-                </div>
+                <SideBarUserInfo expanded={expanded}/>
             </nav>
         </aside>
     );
@@ -142,5 +127,65 @@ export const SideBarItem = ({ icon, text, active, alert, path }) => {
         </li>
     );
 };
+
+const SideBarUserInfo = ({expanded}) => {
+    const [img, setImg] = useState(null);
+    const [name, setName] = useState(null);
+    const [rol, setRol] = useState(null);
+
+    useEffect(() => {
+        bringUserInfo();
+    })
+
+    const navigate = useNavigate();
+
+    const bringUserInfo = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/usuario/${localStorage.getItem('nickname')}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+
+            const data = await response.json();
+            
+            if(response.ok) {
+                setImg(data.fotoPerfilUrl);
+                setName(data.nickname);
+                setRol(data.rol);
+            } else {
+                console.log("Rayos");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+
+    const handleNavigation = (path) => {
+        navigate(path)
+    }
+
+    return (
+        <div className="flex justify-center p-3 h-16 cursor-pointer" onClick={() => handleNavigation(`/profile/${name}`)}>
+                    {/* <BsPersonCircle size={27} color="6837CE" /> */}
+                    <img src={img} alt="imagen de usuario" className="w-[46px] h-[46px] rounded-full object-cover object-center" />
+                    <div
+                        className={`
+                        flex  flex-col justify-between items-start ml-3 
+                        overflow-hidden transition-all ${
+                            expanded ? "w-52" : "w-0"
+                        }    
+                    `}
+                    >
+                        <h4 className="dark:text-white">{name ? name : 'User'}</h4>
+                        <span className="text-xs text-gray-700 dark:text-gray-300">
+                            {rol ? rol : 'user info'}
+                        </span>
+                    </div>
+                </div>
+    );
+}
 
 export default SideBar;
