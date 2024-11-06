@@ -18,13 +18,15 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
     env:
       jwt_secret_key: 'sAj0waj0mLo2A0DJ4ZE3tnabP8YKIx2dkUNU3m0rYAM='
       jwt_time_expiration: '86400000'
       spring_datasource_password: '6MqiP3vrkHCf'
       spring_datasource_url: 'jdbc:postgresql://ep-sweet-tooth-a5jbzkz7.us-east-2.aws.neon.tech:5432/musify_database?sslmode=require'
-      spring_datasource_username: 'musify_database_owner'
-
+      spring_datasource_username: 'musify_database_owner'    
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
