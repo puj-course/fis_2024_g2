@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.musify.model.artista.Artista;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,6 +43,14 @@ public class Cancion {
 
     @Column(name = "empresadiscografica_id_empresa_discografica", nullable = false)
     private String empresaDiscograficaId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "artistasxcancion",
+            joinColumns = @JoinColumn(name = "cancion_id_cancion"),
+            inverseJoinColumns = @JoinColumn(name = "artista_id_artista")
+    )
+    private List<Artista> artistas;
 
 
 }
