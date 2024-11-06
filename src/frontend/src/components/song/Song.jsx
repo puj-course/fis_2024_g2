@@ -1,6 +1,7 @@
 import concert from '../../assets/concert.jpg';
 import PlayButton from './PlayButton';
 import LikeButton from './LikeButton';
+import QueueButton from './QueueButton';
 import { Link } from 'react-router-dom';
 import { usePlayer } from '../../../data/PlayerProvider';
 
@@ -28,6 +29,7 @@ const Song = ({id, img=concert ,name: title="Song name", author="Song author", a
             <span>{formatTime(duration)}</span>
             <PlayButton songUrl={url} songName={title} songImg={img}/>
             <LikeButton />
+            <QueueButton />
         </div>
     );
 }

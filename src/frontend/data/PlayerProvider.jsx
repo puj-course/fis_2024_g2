@@ -7,7 +7,6 @@ export const usePlayer = () => useContext(PlayerContext);
 
 export const PlayerProvider = ({ children }) => {
   const [currentTrack, setCurrentTrack] = useState(null);
-
   const [audio] = useState(new Audio());
   const [queue, setQueue] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -47,8 +46,6 @@ export const PlayerProvider = ({ children }) => {
 
   const playTrack = (track) => {
     setCurrentTrack(track);
-    setCurrentTrackImg(track.songImg);
-    console.log(track.songImg);
   };
 
   const playNextTrack = () => {
@@ -61,6 +58,7 @@ export const PlayerProvider = ({ children }) => {
   };
 
   const addToQueue = (track) => {
+    console.log(queue);
     setQueue((prevQueue) => [...prevQueue, track]);
   };
 
@@ -91,7 +89,6 @@ export const PlayerProvider = ({ children }) => {
     setIsPlaying(false);  // Actualizar el estado de isPlaying
     setCurrentTrack(null);  // Limpiar la canción actual
     setQueue([]);  // Vaciar la cola de canciones (si es necesario)
-    setCurrentTrackImg(null);  // Limpiar la imagen de la canción
     audio.src = null;  // Asegurarse de que no haya ninguna fuente de audio
   };
 
