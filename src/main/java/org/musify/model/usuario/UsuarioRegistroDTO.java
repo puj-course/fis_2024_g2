@@ -10,10 +10,10 @@ public class UsuarioRegistroDTO {
     private String contra;
     private String numeroTelefonico;
     private Date fechaNacimiento;
-    private Integer paisIdPais;
+    private String paisIdPais;
     private Integer idiomaIdIdioma;
 
-    public UsuarioRegistroDTO(String rol, String nombres, String apellidos, String nickname, String contra, String numeroTelefonico, Date fechaNacimiento, Integer paisIdPais, Integer idiomaIdIdioma) {
+    public UsuarioRegistroDTO(String rol, String nombres, String apellidos, String nickname, String contra, String numeroTelefonico, Date fechaNacimiento, String paisIdPais, Integer idiomaIdIdioma) {
         this.rol = rol;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -81,11 +81,11 @@ public class UsuarioRegistroDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Integer getPaisIdPais() {
+    public String getPaisIdPais() {
         return paisIdPais;
     }
 
-    public void setPaisIdPais(Integer paisIdPais) {
+    public void setPaisIdPais(String paisIdPais) {
         this.paisIdPais = paisIdPais;
     }
 

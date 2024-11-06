@@ -4,12 +4,16 @@ package org.musify.model.usuario;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
-import org.musify.model.usuario.UsuarioGratuito;
-import org.musify.model.usuario.UsuarioPremium;
-import org.musify.model.usuario.Administrador;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.musify.model.Pais;
+
 
 import java.sql.Date;
-
+@Getter
+@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "rol")  // Se define la columna, sin tenerla como atributo
@@ -56,8 +60,10 @@ public abstract class Usuario {
     @Column(name = "estado")
     private String estado;
 
-    @Column(name = "pais_id_pais")
-    private Integer paisIdPais;
+    @Getter
+    @ManyToOne
+    @JoinColumn(name = "pais_id_pais", nullable = false)
+    private Pais pais;
 
     @Column(name = "idioma_id_idioma")
     private Integer idiomaIdIdioma;
@@ -71,7 +77,7 @@ public abstract class Usuario {
     // Constructor con parámetros sin 'rol'
     public Usuario(String idUsuario, String nombres, String apellidos, String nickname, String contraseña,
                    String numeroTelefonico, Date fechaNacimiento, Date fechaRegistro, String estado,
-                   Integer paisIdPais, Integer idiomaIdIdioma, String fotoPerfilUrl) {
+                   Pais pais, Integer idiomaIdIdioma, String fotoPerfilUrl) {
         this.idUsuario = idUsuario;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -81,7 +87,7 @@ public abstract class Usuario {
         this.fechaNacimiento = fechaNacimiento;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
-        this.paisIdPais = paisIdPais;
+        this.pais = pais;
         this.idiomaIdIdioma = idiomaIdIdioma;
         this.fotoPerfilUrl = fotoPerfilUrl;
     }
@@ -171,12 +177,8 @@ public abstract class Usuario {
         this.estado = estado;
     }
 
-    public Integer getPaisIdPais() {
-        return paisIdPais;
-    }
-
-    public void setPaisIdPais(Integer paisIdPais) {
-        this.paisIdPais = paisIdPais;
+    public void setPaisIdPais(Pais pais) {
+        this.pais = pais;
     }
 
     public Integer getIdiomaIdIdioma() {

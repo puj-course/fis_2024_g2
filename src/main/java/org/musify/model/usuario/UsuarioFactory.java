@@ -1,5 +1,6 @@
 package org.musify.model.usuario;
 
+import org.musify.model.Pais;
 import org.musify.model.usuario.UsuarioGratuito;
 import org.musify.model.usuario.UsuarioPremium;
 import org.musify.model.usuario.Administrador;
@@ -27,21 +28,21 @@ public class UsuarioFactory {
                                        String nickname, String email, String contraseña,
                                        String fotoPerfilUrl, Date fechaNacimiento,
                                        Date fechaRegistro, String estado,
-                                       Integer paisIdPais, Integer idiomaIdIdioma, String biografia) {
+                                       Pais pais, Integer idiomaIdIdioma, String biografia) {
         switch (tipo) {
             case GRATUITO:
                 return new UsuarioGratuito(idUsuario, nombres, apellidos, nickname, contraseña, email,
                         fechaNacimiento, fechaRegistro, estado,
-                        paisIdPais, idiomaIdIdioma, fotoPerfilUrl);
+                        pais, idiomaIdIdioma, fotoPerfilUrl);
             case PREMIUM:
                 return new UsuarioPremium(idUsuario, nombres, apellidos, nickname, contraseña, email,
                         fechaNacimiento, fechaRegistro, estado,
-                        paisIdPais, idiomaIdIdioma, fotoPerfilUrl);
+                        pais, idiomaIdIdioma, fotoPerfilUrl);
 
             case ADMIN:
                 return new Administrador(idUsuario, nombres, apellidos, nickname, contraseña, email,
                         fechaNacimiento, fechaRegistro, estado,
-                        paisIdPais, idiomaIdIdioma, fotoPerfilUrl);
+                        pais, idiomaIdIdioma, fotoPerfilUrl);
 
             default:
                 throw new IllegalArgumentException("Tipo de usuario no válido");
