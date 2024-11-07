@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/login").permitAll();
+                    auth.requestMatchers(("/usuario/crearUsuario")).permitAll();
                     auth.requestMatchers("/usuario").hasAnyRole("ADMIN", "PREMIUM"); // Ajusta los permisos según lo necesario
                     auth.anyRequest().authenticated();
                 })
