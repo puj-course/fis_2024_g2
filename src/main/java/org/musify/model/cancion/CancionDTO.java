@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.musify.model.artista.ArtistaDTO;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -19,6 +23,7 @@ public class CancionDTO {
     private String audioUrl;
     private String imagenUrl;
     private String empresaDiscograficaId;
+    private List<ArtistaDTO> artistas;
 
     public CancionDTO(Cancion cancion) {
         this.nombre = cancion.getNombre();
@@ -28,5 +33,8 @@ public class CancionDTO {
         this.audioUrl = cancion.getAudioUrl();
         this.imagenUrl = cancion.getImagenUrl();
         this.empresaDiscograficaId = cancion.getEmpresaDiscograficaId();
+        this.artistas = cancion.getArtistas().stream()
+                .map(ArtistaDTO::new)
+                .collect(Collectors.toList());  // Se convierte cada Artista a ArtistaDTO
     }
 }

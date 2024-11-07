@@ -18,7 +18,7 @@ public class UsuarioMostrarDatosDTO {
     private String nickname;
     private Date fechaNacimiento;
     private Date fechaRegistro;
-    private Integer paisIdPais;
+    private String nombrePais;
     private String fotoPerfilUrl;
 
     public UsuarioMostrarDatosDTO(Usuario usuario) {
@@ -27,7 +27,7 @@ public class UsuarioMostrarDatosDTO {
         this.nickname = usuario.getNickname();
         this.fechaNacimiento = usuario.getFechaNacimiento();
         this.fechaRegistro = usuario.getFechaRegistro();
-        this.paisIdPais = usuario.getPaisIdPais();  // Asegúrate de que este método exista
-        this.fotoPerfilUrl = usuario.getFotoPerfilUrl();  // Asegúrate de que este método exista
+        this.nombrePais = usuario.getPais().getNombre();
+        this.fotoPerfilUrl = usuario.getFotoPerfilUrl();
     }
 }

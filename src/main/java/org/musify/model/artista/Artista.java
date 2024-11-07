@@ -1,9 +1,11 @@
 package org.musify.model.artista;
 
 import jakarta.persistence.*;
+import org.musify.model.cancion.Cancion;
 import org.musify.model.usuario.Usuario;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "artista")
@@ -26,17 +28,24 @@ public class Artista {
     @Column(name = "biografia", length = 100)
     private String biografia;
 
+    @Column (name = "foto_perfil_url",length = 255)
+    private String fotoPerfilUrl;
+
+    @ManyToMany(mappedBy = "artistas")
+    private List<Cancion> canciones;
+
     // Constructor por defecto
     public Artista() {
     }
 
     // Constructor con parámetros
-    public Artista(String idArtista, Usuario usuario, String nombreArtistico, Date fechaRegistroArtista, String biografia) {
+    public Artista(String idArtista, Usuario usuario, String nombreArtistico, Date fechaRegistroArtista, String biografia, String fotoPerfilUrl, List<Cancion> canciones) {
         this.idArtista = idArtista;
         this.usuario = usuario;
         this.nombreArtistico = nombreArtistico;
         this.fechaRegistroArtista = fechaRegistroArtista;
         this.biografia = biografia;
+        this.fotoPerfilUrl = fotoPerfilUrl;
     }
     public String getIdUsuario(){
         return usuario.getId_usuario();
@@ -81,4 +90,8 @@ public class Artista {
     public void setBiografia(String biografia) {
         this.biografia = biografia;
     }
+
+    public String getFotoPerfilUrl() {return fotoPerfilUrl;}
+
+    public void setFotoPerfilUrl(String fotoPerfilUrl) {this.fotoPerfilUrl = fotoPerfilUrl;}
 }

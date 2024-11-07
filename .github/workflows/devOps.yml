@@ -1,0 +1,42 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    env:
+      jwt_secret_key: 'sAj0waj0mLo2A0DJ4ZE3tnabP8YKIx2dkUNU3m0rYAM='
+      jwt_time_expiration: '86400000'
+      spring_datasource_password: '6MqiP3vrkHCf'
+      spring_datasource_url: 'jdbc:postgresql://ep-sweet-tooth-a5jbzkz7.us-east-2.aws.neon.tech:5432/musify_database?sslmode=require'
+      spring_datasource_username: 'musify_database_owner'    
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

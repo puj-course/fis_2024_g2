@@ -1,5 +1,6 @@
 //Componentes
 import DarkModeToggle from "../darkModeToggle/DarkModeToggle";
+import LogOut from "../logOut/logOut";
 import { FaSearch } from 'react-icons/fa';
 
 const Header = () => {
@@ -12,8 +13,11 @@ const Header = () => {
                     className="bg-transparent outline-none border-none bg-gray-200 dark:bg-darkNavBar px-10 py-2 w-full rounded-lg text-gray-500 dark:text-gray-300"
                     placeholder="Search artist, albums, songs..."
                 />
-            </div>  
-            <DarkModeToggle />
+            </div>
+            <div className="flex gap-3 items-center">
+                <LogOut />
+                <DarkModeToggle />
+            </div>
         </header>
     );
 };

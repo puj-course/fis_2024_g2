@@ -1,7 +1,9 @@
 package org.musify.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.musify.model.Pais;
 import org.musify.model.usuario.*;
+import org.musify.repository.PaisRepository;
 import org.musify.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,6 +27,9 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PaisRepository paisRepository;
 
 
     @Override
@@ -50,8 +55,11 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         usuario.setContra(usuarioDTO.getContra());
         usuario.setNumeroTelefonico(usuarioDTO.getNumeroTelefonico());
         usuario.setFechaNacimiento(usuarioDTO.getFechaNacimiento());
-        usuario.setPaisIdPais(usuarioDTO.getPaisIdPais());
         usuario.setIdiomaIdIdioma(usuarioDTO.getIdiomaIdIdioma());
+
+        Pais pais = paisRepository.findById(usuarioDTO.getPaisIdPais())
+                .orElseThrow(() -> new RuntimeException("El país no existe"));
+        usuario.setPais(pais);
 
 
         //Agregar datos adicionales
