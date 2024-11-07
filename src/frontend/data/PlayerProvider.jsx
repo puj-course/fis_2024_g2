@@ -109,6 +109,10 @@ export const PlayerProvider = ({ children }) => {
     audio.currentTime = Math.max(audio.currentTime - seconds, 0);
   };
 
+  const restartTrack = () => {
+    audio.currentTime = 0;
+  };
+
   const stopAudio = () => {
     audio.pause();  // Detener la reproducción
     audio.currentTime = 0;  // Resetear el tiempo de reproducción a 0
@@ -128,10 +132,12 @@ export const PlayerProvider = ({ children }) => {
         duration,
         queue,
         playTrack,
+        playNextTrack,
         togglePlayPause,
         addToQueue,
         skipForward,
         skipBackward,
+        restartTrack,
         paused,
         stopAudio,
       }}

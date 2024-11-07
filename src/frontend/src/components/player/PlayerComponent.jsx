@@ -1,6 +1,9 @@
 import { useContext, useEffect } from "react";
 import { usePlayer } from "../../../data/PlayerProvider";
 import { FaPlay, FaPause, FaBackward, FaForward } from "react-icons/fa";
+import { TbRewindBackward10 } from "react-icons/tb";
+import { TbRewindForward10 } from "react-icons/tb";
+
 import exp from "constants";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +22,9 @@ const PlayerComponent = ({expanded}) => {
     skipBackward,
     currentTime,
     duration,
-    paused
+    paused,
+    restartTrack,
+    playNextTrack,
   } = usePlayer();
 
   const formatTime = (seconds) => {
@@ -53,8 +58,11 @@ const PlayerComponent = ({expanded}) => {
 
       {/* Controles de reproducción */}
       <div className="flex items-center gap-4">
+        <button>
+          <TbRewindBackward10 size={20} onClick={() => skipBackward(10)}/>
+        </button>
         <button
-          onClick={() => skipBackward(5)}
+          onClick={restartTrack}
           className="p-2 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition"
         >
           <FaBackward size={20} />
@@ -66,18 +74,22 @@ const PlayerComponent = ({expanded}) => {
           {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
         </button>
         <button
-          onClick={() => skipForward(5)}
+          onClick={playNextTrack}
           className="p-2 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition"
         >
           <FaForward size={20} />
         </button>
-        <button onClick={() => handleNavigation('/queue')} className="bg-green-700 py-2 px-4 rounded-full text-white">
-          Go to Queue
+        <button>
+          <TbRewindForward10 size={20} onClick={() => skipForward(10)}/>
         </button>
+        
       </div>
 
       {/* Barra de progreso */}
       <div className="flex items-center gap-2">
+      <button onClick={() => handleNavigation('/queue')} className="bg-green-700 py-2 px-4 rounded-full text-white">
+          Go to Queue
+        </button>
         <span className="text-sm">{formatTime(currentTime)}</span>
         <input
           type="range"
