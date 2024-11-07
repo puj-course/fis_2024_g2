@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import musify from "../../assets/musify.png";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+    
+    const navigate = useNavigate();
+
+    const handleNavigation = () => {
+        navigate("/login");
+    };
+    
     const [formData, setFormData] = useState({
         nombres: "",
         apellidos: "",
@@ -179,6 +187,15 @@ const RegisterPage = () => {
                             {error && <p className="text-red-500">{error}</p>}
                             {success && <p className="text-green-500">¡Registro exitoso!</p>}
 
+                            {/* Botón de Inicio de Sesión */}
+                            <button
+                                type="button"
+                                className="bg-white text-black hover:bg-gray-300 rounded-lg"
+                                onClick={handleNavigation}
+                            >
+                                Login
+                            </button>
+                                
                             {/* Botón de Registro */}
                             <button type="submit" className="bg-white text-black hover:bg-gray-300 rounded-lg py-2 mt-4" disabled={loading}>
                                 {loading ? "Cargando..." : "Register"}

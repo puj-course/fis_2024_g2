@@ -116,7 +116,7 @@ const ProfilePage = () => {
                     {/* Image and Nickname */}
                     <div className="flex flex-col items-center gap-6">
                         <img
-                            src={user?.fotoPerfilUrl}
+                            src={user?.fotoPerfilUrl ? user?.fotoPerfilUrl : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
                             alt="Foto del usuario"
                             className="rounded-full w-40 h-40 object-cover shadow-xl transition-all duration-300 transform hover:scale-105"
                         />

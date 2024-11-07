@@ -170,7 +170,7 @@ const SideBarUserInfo = ({expanded}) => {
     return (
         <div className="flex justify-center p-3 h-16 cursor-pointer" onClick={() => handleNavigation(`/profile/${name}`)}>
                     {/* <BsPersonCircle size={27} color="6837CE" /> */}
-                    <img src={img} alt="imagen de usuario" className="w-[46px] h-[46px] rounded-full object-cover object-center" />
+                    <img src={img ? img : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} alt="imagen de usuario" className="w-[46px] h-[46px] rounded-full object-cover object-center" />
                     <div
                         className={`
                         flex  flex-col justify-between items-start ml-3 
