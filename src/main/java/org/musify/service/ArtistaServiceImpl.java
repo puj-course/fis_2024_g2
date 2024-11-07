@@ -45,6 +45,7 @@ public class ArtistaServiceImpl implements ArtistaService{
         nuevoArtista.setFechaRegistroArtista(Date.valueOf(LocalDate.now()));
         nuevoArtista.setNombreArtistico(artista.getNombreArtistico());
         nuevoArtista.setBiografia(artista.getBiografia());
+        nuevoArtista.setFotoPerfilUrl(artista.getFotoPerfilUrl());
         return artistaRepository.save(nuevoArtista);
     }
 
