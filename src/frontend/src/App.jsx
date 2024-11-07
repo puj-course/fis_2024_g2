@@ -14,6 +14,7 @@ import HomePage from './pages/home/HomePage';
 import MainPage from './pages/main/MainPage';
 import Album from "./pages/album/AlbumPage";
 import ProfilePage from "./pages/profile/profilePage";
+import QueueComponent from "./components/player/QueueComponent";
 
 
 //Router
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: '/profile/:nickname',
         element: <ProfilePage />
+      },
+      {
+        path: '/queue',
+        element: <QueueComponent />
       }
     ]
   }

@@ -15,7 +15,7 @@ const Song = ({id, img=concert ,name: title="Song name", author="Song author", a
     const { isPlaying, currentTrack } = usePlayer();
     
     return (
-        <div className={`px-6 py-2 flex bg-gray-100 hover:bg-gray-300 dark:bg-zinc-900 hover:dark:bg-zinc-800 h-[3.7rem] rounded-lg gap-5 items-center select-none overflow-hidden ${isPlaying && (currentTrack.songName === title) ? 'text-green-700' : ''} transition-all`}>
+        <div className={`px-6 py-2 flex bg-gray-100 hover:bg-gray-300 dark:bg-zinc-900 hover:dark:bg-zinc-800 h-[3.7rem] rounded-lg gap-5 items-center select-none overflow-hidden ${isPlaying && (currentTrack?.songName === title) ? 'text-green-700' : ''} transition-all`}>
             <img
                 src={img}
                 alt="Song cover"
@@ -29,7 +29,7 @@ const Song = ({id, img=concert ,name: title="Song name", author="Song author", a
             <span>{formatTime(duration)}</span>
             <PlayButton songUrl={url} songName={title} songImg={img}/>
             <LikeButton />
-            <QueueButton />
+            <QueueButton songUrl={url} songName={title} songImg={img}/>
         </div>
     );
 }

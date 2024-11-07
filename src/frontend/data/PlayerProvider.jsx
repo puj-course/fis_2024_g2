@@ -1,4 +1,3 @@
-// PlayerContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const PlayerContext = createContext();
@@ -16,6 +15,7 @@ export const PlayerProvider = ({ children }) => {
 
   useEffect(() => {
     if (currentTrack) {
+      console.log(currentTrack)
       audio.src = currentTrack.audioUrl;
       audio.play();
       setIsPlaying(true);
@@ -32,6 +32,13 @@ export const PlayerProvider = ({ children }) => {
 
       // Llamar a playNextTrack cuando la canción termina
       audio.onended = () => {
+        console.log('Canción terminada');
+        audio.pause();  // Detener la reproducción
+        audio.currentTime = 0;  // Resetear el tiempo de reproducción a 0
+        setPaused(false);
+        setIsPlaying(false);  // Actualizar el estado de isPlaying
+        setCurrentTrack(null);  // Limpiar la canción actual
+        audio.src = null;  // Asegurarse de que no haya ninguna fuente de audio
         playNextTrack();
       };
     }
@@ -44,22 +51,42 @@ export const PlayerProvider = ({ children }) => {
     };
   }, [currentTrack]);
 
+  // Este useEffect se ejecutará cuando la cola cambie
+  useEffect(() => {
+    if (queue.length > 0 && !currentTrack && !isPlaying) {
+      // Si no hay track actual y la cola tiene canciones, reproducir la primera
+      playNextTrack();
+    }
+  }, [queue, currentTrack]); // Depende de queue y currentTrack
+
   const playTrack = (track) => {
     setCurrentTrack(track);
   };
 
   const playNextTrack = () => {
     if (queue.length > 0) {
-      setCurrentTrack(queue[0]); // Configurar la siguiente canción en la cola
-      setQueue(queue.slice(1)); // Eliminar la canción que se va a reproducir de la cola
+      console.log('Valide el if')
+      const nextTrack = queue[0];
+      console.log(nextTrack);
+      setCurrentTrack(nextTrack);  // Esto actualizará currentTrack y disparará el efecto
+      setQueue(queue.slice(1));  // Eliminar la canción que se va a reproducir de la cola
     } else {
       setIsPlaying(false); // No hay más canciones, detener la reproducción
     }
   };
 
   const addToQueue = (track) => {
-    console.log(queue);
-    setQueue((prevQueue) => [...prevQueue, track]);
+    setQueue((prevQueue) => {
+      const newQueue = [...prevQueue, track];
+
+      // Si no hay track actual y la cola está vacía, reproducir la canción inmediatamente
+      if (!currentTrack && newQueue.length === 1) {
+        playNextTrack();  // Esto comenzará a reproducir la primera canción
+      }
+
+      console.log(newQueue);
+      return newQueue;
+    });
   };
 
   const togglePlayPause = () => {
@@ -70,8 +97,8 @@ export const PlayerProvider = ({ children }) => {
     } else {
       audio.play();
       setPaused(false);
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const skipForward = (seconds) => {
@@ -107,7 +134,6 @@ export const PlayerProvider = ({ children }) => {
         skipBackward,
         paused,
         stopAudio,
-
       }}
     >
       {children}
