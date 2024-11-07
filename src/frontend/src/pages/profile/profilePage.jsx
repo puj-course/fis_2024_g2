@@ -99,6 +99,7 @@ const ProfilePage = () => {
 
             if (response.ok) {
                 setUser(data);
+                console.log(data);  
             } else {
                 console.log("upsi");
             }
@@ -126,10 +127,11 @@ const ProfilePage = () => {
                     <div className="mt-8 bg-gray-50 dark:bg-zinc-800 p-6 rounded-lg shadow-sm">
                         <h2 className="text-xl font-medium text-gray-900 dark:text-gray-100 mb-4">Your Info</h2>
                         <ul className="space-y-4 text-lg font-light text-gray-700 dark:text-gray-300">
-                            <li className="flex items-center gap-2">
-                                <strong className="w-1/3">Nombre:</strong>
-                                <span>{user?.nombres}</span>
+                            <li className={`flex items-center gap-2 font-medium ${user?.rol == 'premium' ? 'text-purple-600' : ''}`}>
+                                <strong className="w-1/3">Tipo de suscripción: </strong>
+                                <span>{user?.rol}</span>
                             </li>
+                            
                             <li className="flex items-center gap-2">
                                 <strong className="w-1/3">Apellido:</strong>
                                 <span>{user?.apellidos}</span>

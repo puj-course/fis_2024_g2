@@ -24,7 +24,7 @@ const PlayerComponent = ({expanded}) => {
     duration,
     paused,
     restartTrack,
-    playNextTrack,
+    playNextTrackQueue,
   } = usePlayer();
 
   const formatTime = (seconds) => {
@@ -74,7 +74,7 @@ const PlayerComponent = ({expanded}) => {
           {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
         </button>
         <button
-          onClick={playNextTrack}
+          onClick={playNextTrackQueue}
           className="p-2 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition"
         >
           <FaForward size={20} />

@@ -75,6 +75,16 @@ export const PlayerProvider = ({ children }) => {
     }
   };
 
+  const playNextTrackQueue = () => {
+    if (queue.length > 0) {
+      console.log('Valide el if')
+      const nextTrack = queue[0];
+      console.log(nextTrack);
+      setCurrentTrack(nextTrack);  // Esto actualizará currentTrack y disparará el efecto
+      setQueue(queue.slice(1));  // Eliminar la canción que se va a reproducir de la cola
+    } 
+  };
+
   const addToQueue = (track) => {
     setQueue((prevQueue) => {
       const newQueue = [...prevQueue, track];
@@ -132,7 +142,7 @@ export const PlayerProvider = ({ children }) => {
         duration,
         queue,
         playTrack,
-        playNextTrack,
+        playNextTrackQueue,
         togglePlayPause,
         addToQueue,
         skipForward,
